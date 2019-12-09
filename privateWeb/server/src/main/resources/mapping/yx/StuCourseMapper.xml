@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.yx.StuCourseMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.yx.StuCourse">
+    <id column="id" jdbcType="NCHAR" property="id" />
+    <result column="stu_id" jdbcType="NVARCHAR" property="stuId" />
+    <result column="stu_user_name" jdbcType="NVARCHAR" property="stuUserName" />
+    <result column="course_id" jdbcType="NVARCHAR" property="courseId" />
+    <result column="course_name" jdbcType="NVARCHAR" property="courseName" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="progress" jdbcType="TINYINT" property="progress" />
+    <result column="agent_id" jdbcType="INTEGER" property="agentId" />
+    <result column="agentname" jdbcType="NVARCHAR" property="agentname" />
+    <result column="complete_lesson_num" jdbcType="INTEGER" property="completeLessonNum" />
+    <result column="product_id" jdbcType="NVARCHAR" property="productId" />
+  </resultMap>
+
+  <select id="queryStuCourseNum" resultType="java.lang.Integer">
+    select count(id) from stu_course where stu_id=#{stuId}
+  </select>
+  <select id="studyAccount" resultType="com.zhongda.yunxiao.server.entity.bean.StudyAccount">
+  	SELECT scl.product_id productId,sc.stu_user_name userName,
+  		SUM(CASE WHEN scl.study_state = 1 then 1 ELSE 0 END) completeLessonNum,
+  		MAX(scl.last_operation_time) lastOperationTime,
+  		SUM(scl.study_count) studyCount,AVG(sc.progress) progress
+	FROM stu_course sc
+	LEFT JOIN stu_course_lesson scl ON sc.id = scl.stu_course_id
+	WHERE   scl.agentname=#{agentName} AND sc.stu_id IN
+	<foreach collection="list" open="(" close=")" separator="," item="stuid" >
+		#{stuid}
+	</foreach>
+	GROUP BY scl.product_id,sc.stu_user_name
+  </select>
+  <select id="selectStuCourseCount" resultType="java.lang.Integer">
+  	select count(1) from stu_course where 1 = 1
+  	<if test="null != stuId">
+  		and stu_id = #{stuId}
+  	</if>
+  	<if test="null != productId">
+  		and product_id = #{productId}
+  	</if>
+  	<if test="null != agentId">
+  		and agent_id = #{agentId}
+  	</if>
+  </select>
+</mapper>

@@ -1,0 +1,164 @@
+#content > .min-center-width {
+  padding: 20px 0 100px; }
+  #content > .min-center-width > #crumbs {
+    margin-top: 15px; }
+  #content > .min-center-width > #exam-title {
+    margin-top: 20px; }
+    #content > .min-center-width > #exam-title > span {
+      margin-right: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      vertical-align: middle; }
+    #content > .min-center-width > #exam-title > a {
+      font-size: 14px;
+      color: #5B95F4;
+      vertical-align: middle; }
+  #content > .min-center-width > #examAll-type {
+    margin-top: 15px;
+    padding: 0 20px;
+    background-color: #fff; }
+    #content > .min-center-width > #examAll-type > .border {
+      border-bottom: 1px solid #eee; }
+    #content > .min-center-width > #examAll-type > .subject {
+      font-size: 14px; }
+      #content > .min-center-width > #examAll-type > .subject > p {
+        float: left;
+        margin-top: 10px;
+        width: 80px;
+        color: #999; }
+      #content > .min-center-width > #examAll-type > .subject > li {
+        float: left;
+        margin-right: -20px;
+        width: 1078px; }
+        #content > .min-center-width > #examAll-type > .subject > li > a {
+          display: inline-block;
+          color: #666;
+          margin: 10px 20px 10px 0; }
+  #content > .min-center-width > #module-scope {
+    width: 831px;
+    display: inline-block;
+    vertical-align: top; }
+    #content > .min-center-width > #module-scope > li {
+      margin: 50px 48px 0 0;
+      display: inline-block;
+      width: 365px;
+      border: 1px solid #eeeeee;
+      background-color: #fff; }
+      #content > .min-center-width > #module-scope > li > .title {
+        height: 53px;
+        line-height: 53px;
+        font-size: 22px;
+        background: #f03932;
+        color: white;
+        text-align: center; }
+      #content > .min-center-width > #module-scope > li > ol {
+        height: 389px; }
+        #content > .min-center-width > #module-scope > li > ol > li {
+          padding: 20px 20px 10px;
+          border-bottom: 1px solid #eeeeee; }
+          #content > .min-center-width > #module-scope > li > ol > li > a {
+            display: block;
+            font-size: 18px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap; }
+          #content > .min-center-width > #module-scope > li > ol > li > p {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #999; }
+            #content > .min-center-width > #module-scope > li > ol > li > p > span {
+              color: #FF8206; }
+      #content > .min-center-width > #module-scope > li > .module_add {
+        padding: 20px;
+        text-align: right;
+        font-size: 12px; }
+        #content > .min-center-width > #module-scope > li > .module_add > a {
+          color: #999; }
+          #content > .min-center-width > #module-scope > li > .module_add > a > span {
+            vertical-align: middle; }
+          #content > .min-center-width > #module-scope > li > .module_add > a > img {
+            margin-left: 5px;
+            vertical-align: middle; }
+  #content > .min-center-width > #module-scopeLong {
+    width: 364px;
+    margin-top: 50px;
+    display: inline-block;
+    background-color: #fff;
+    vertical-align: top; }
+    #content > .min-center-width > #module-scopeLong > .title {
+      height: 53px;
+      line-height: 53px;
+      font-size: 22px;
+      background: #f03932;
+      color: white;
+      text-align: center; }
+    #content > .min-center-width > #module-scopeLong > h3 {
+      padding: 0 25px;
+      margin-top: 17px;
+      font-size: 18px;
+      color: #333;
+      font-weight: bold; }
+    #content > .min-center-width > #module-scopeLong > ol > li {
+      padding: 18px 25px 17px 12px;
+      border-bottom: 1px solid #eeeeee; }
+      #content > .min-center-width > #module-scopeLong > ol > li > .module_text > i {
+        display: inline-block;
+        width: 5px;
+        height: 5px;
+        background: #f03932;
+        border-radius: 50%;
+        vertical-align: middle; }
+      #content > .min-center-width > #module-scopeLong > ol > li > .module_text > .name {
+        display: inline-block;
+        vertical-align: middle;
+        width: 250px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap; }
+      #content > .min-center-width > #module-scopeLong > ol > li > .module_text > .progerss-text {
+        display: inline-block;
+        vertical-align: middle;
+        width: 62px;
+        text-align: right;
+        font-size: 14px;
+        color: #999; }
+      #content > .min-center-width > #module-scopeLong > ol > li > .progerss {
+        margin: 10px 0 0 10px;
+        width: 316px;
+        height: 4px;
+        background: #eeeeee;
+        border-radius: 2px;
+        overflow: hidden; }
+        #content > .min-center-width > #module-scopeLong > ol > li > .progerss > i {
+          display: block;
+          height: 4px;
+          vertical-align: top;
+          background-color: #f03932;
+          border-radius: 2px; }
+    #content > .min-center-width > #module-scopeLong > ol > h3 {
+      padding: 0 25px;
+      margin-top: 17px;
+      font-size: 18px;
+      color: #333;
+      font-weight: 700; }
+      #content > .min-center-width > #module-scopeLong > ol > h3 > a {
+        display: inline-block;
+        width: 66px;
+        height: 26px;
+        background: #f03932;
+        border-radius: 5px;
+        text-align: center;
+        line-height: 26px;
+        font-weight: normal;
+        font-size: 14px; }
+    #content > .min-center-width > #module-scopeLong > .module_add {
+      padding: 20px;
+      text-align: right;
+      font-size: 12px; }
+      #content > .min-center-width > #module-scopeLong > .module_add > a {
+        color: #999; }
+        #content > .min-center-width > #module-scopeLong > .module_add > a > span {
+          vertical-align: middle; }
+        #content > .min-center-width > #module-scopeLong > .module_add > a > img {
+          margin-left: 5px;
+          vertical-align: middle; }

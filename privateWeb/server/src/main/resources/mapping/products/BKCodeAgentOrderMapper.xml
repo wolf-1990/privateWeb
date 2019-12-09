@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.products.BKCodeAgentOrderMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.products.BKCodeAgentOrder">
+    <id column="OrderNumber" jdbcType="VARCHAR" property="ordernumber" />
+    <result column="TotalDiscountMoney" jdbcType="DECIMAL" property="totaldiscountmoney" />
+    <result column="TotalMoney" jdbcType="DECIMAL" property="totalmoney" />
+    <result column="TotalCount" jdbcType="INTEGER" property="totalcount" />
+    <result column="AgentName" jdbcType="VARCHAR" property="agentname" />
+    <result column="AgentId" jdbcType="INTEGER" property="agentid" />
+    <result column="UserFor" jdbcType="TINYINT" property="userfor" />
+    <result column="PayStatus" jdbcType="TINYINT" property="paystatus" />
+    <result column="CreateTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="PayTime" jdbcType="TIMESTAMP" property="paytime" />
+    <result column="PayType" jdbcType="TINYINT" property="paytype" />
+    <result column="ExamId" jdbcType="VARCHAR" property="examid" />
+    <result column="ExamName" jdbcType="NVARCHAR" property="examname" />
+    <result column="IsCreateCode" jdbcType="TINYINT" property="iscreatecode" />
+    <result column="SettlementType" jdbcType="TINYINT" property="settlementtype" />
+    <result column="BuyForUserName" jdbcType="VARCHAR" property="buyforusername" />
+  </resultMap>
+
+  <select id="queryOrgOrderStatus" resultType="com.zhongda.yunxiao.server.entity.response.PayCodeStatusOut">
+    select OrderNumber orderNumber,PayStatus payStatus,IsCreateCode isCreateCode,TotalMoney totalMoney
+    from BKCodeAgentOrder
+    where OrderNumber=#{OrderNumber} and AgentId=#{agent.agentId} and AgentName=#{agent.agentName}
+  </select>
+
+</mapper>

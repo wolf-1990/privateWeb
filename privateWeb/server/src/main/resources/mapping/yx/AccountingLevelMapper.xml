@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.yx.AccountingLevelMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.yx.AccountingLevel">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="agentname" jdbcType="VARCHAR" property="agentname" />
+    <result column="discountRate" jdbcType="DECIMAL" property="discountrate" />
+    <result column="year_num" jdbcType="INTEGER" property="yearNum" />
+    <result column="agent_id" jdbcType="INTEGER" property="agentId" />
+  </resultMap>
+
+  <select id="findAgentAccountList" resultMap="BaseResultMap">
+    select * from Accounting_Level where agent_id=#{agentId} order by year_num ASC
+  </select>
+
+  <delete id="deleteByAgent">
+    delete from Accounting_Level where agent_id=#{param.agentId}
+  </delete>
+
+  <insert id="batchRenewalAccount">
+    insert into Accounting_Level (agentname,discountRate,year_num,agent_id) values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.agentname},#{item.discountrate},#{item.yearNum},#{item.agentId})
+    </foreach>
+  </insert>
+
+  <select id="queryAccountByAgent" resultMap="BaseResultMap">
+    select * from Accounting_Level where agent_id=#{agentId} and agentname=#{agentName} and year_num=#{yearNum}
+  </select>
+</mapper>

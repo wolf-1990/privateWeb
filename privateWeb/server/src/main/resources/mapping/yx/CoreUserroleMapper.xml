@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.yx.CoreUserroleMapper">
+	<resultMap id="BaseResultMap"
+		type="com.zhongda.yunxiao.server.entity.yx.CoreUserrole">
+		<result column="user_id" jdbcType="VARCHAR" property="userId" />
+		<result column="role_id" jdbcType="VARCHAR" property="roleId" />
+	</resultMap>
+
+	<select id="selectByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select cur.user_id, cur.role_id from core_userrole cur
+		LEFT JOIN core_role cr on cur.role_id = cr.id where cur.user_id = #{userId,jdbcType=VARCHAR}
+		AND cr.is_delete = 0 AND cr.status = 1
+	</select>
+	<insert id="saveUserRoleRelation">
+		insert into core_userrole (user_id,role_id)
+		values 
+		<foreach collection="roleIds" separator="," item="roleId">
+			(#{userId}, #{roleId})
+		</foreach>
+	</insert>
+	<delete id="deleteUserRole" parameterType="java.lang.String">
+		delete from core_userrole where user_id = #{userId}
+	</delete>
+</mapper>

@@ -1,0 +1,332 @@
+.nav-menu-down {
+  position: absolute;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.5);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4c000000,endColorstr=#4c000000); }
+
+.nav-box {
+  background-color: #fff;
+  border-bottom: 4px solid  #25B7FF; }
+
+.nav_right li a {
+  color: #333; }
+
+.nav_right .nav_active a {
+  color: #015eac; }
+
+.nav-box .search-box span {
+  color: #999; }
+
+.nav-box .search-box {
+  border: 1px solid #ccc; }
+
+.nav-box .search-box > span {
+  border-right: 1px solid #ccc; }
+
+.search-box #search-text {
+  color: #666; }
+
+.nav-box .search-box .course-down-ico {
+  background-position: -177px -14px; }
+
+.nav-box .search-box .course-up-ico {
+  background-position: -191px -14px; }
+
+.nav-box .search-box .serch-ico {
+  background-position: -51px -11px; }
+
+.nav-menu-down .course-type {
+  color: #fff; }
+
+.nav-menu-down a {
+  color: #fff; }
+
+.nav-menu-down {
+  height: 360px;
+  /*overflow-y: hidden;*/ }
+
+.nav-menu-down ul > li:hover {
+  background-color: #0085d0;
+  color: #fff; }
+
+.nav-menu-down ul > li:hover .course-type,
+.nav-menu-down ul > li:hover .course-subject a {
+  color: #fff; }
+
+.nav-menu-down ul > li#more-menu:hover .course-type,
+.nav-menu-down ul > li#more-menu:hover .course-subject a {
+  color: #fff; }
+
+.nav_left {
+  background-color: #0085d0;
+  line-height: 50px; }
+
+.nav-menu-down .ico-right {
+  background-position: -144px -14px; }
+
+.hot-choiceness {
+  font-size: 20px; }
+
+.nav-menu-down ul > li#more-menu:hover ul > li .ico-right {
+  background-position: -144px -14px; }
+
+.more-btn {
+  font-size: 16px;
+  color: #333;
+  position: absolute;
+  right: 0;
+  top: 12px; }
+
+.table-box table .text-l {
+  text-align: left; }
+
+.list-title td {
+  padding: 10px 0;
+  background-color: #f7f7f7; }
+
+.them-c {
+  color: #25B7FF; }
+
+.height20 {
+  height: 20px;
+  width: 100%;
+  clear: both; }
+
+.table-box {
+  border: 1px solid #eeeeee;
+  background-color: #fff;
+  margin-top: 20px; }
+
+.table-box {
+  width: 100%; }
+
+.table-box table tr {
+  color: #333;
+  padding: 10px 0;
+  font-size: 14px; }
+
+.table-box table th {
+  height: 50px;
+  line-height: 50px;
+  background-color: #f4f9ff;
+  color: #666;
+  font-size: 14px; }
+
+.table-box table tr td {
+  text-align: center; }
+
+.table-box .course-img {
+  width: 140px;
+  height: 78px;
+  display: inline-block; }
+
+.table-box table tr .delete-btn {
+  display: inline-block;
+  padding: 5px 20px;
+  color: #0085d0;
+  border-radius: 3px;
+  border: 1px solid #0085d0;
+  cursor: pointer; }
+
+.have-down {
+  color: #999;
+  margin-left: 10px; }
+
+.selected-box {
+  width: 18px;
+  height: 18px;
+  line-height: 13px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  text-align: center;
+  display: inline-block;
+  margin: 0 5px 0 10px;
+  cursor: pointer; }
+
+.selected-box.active {
+  border: 1px solid #0085d0; }
+
+.selected-box .selected-list {
+  color: transparent; }
+
+.selected-box.active .selected-list {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #0085d0; }
+
+.marginleft {
+  margin-left: 40px; }
+
+.table-box .course-box {
+  margin: 30px 0 30px 40px; }
+
+.table-box .course-title {
+  height: 78px;
+  line-height: 78px;
+  display: inline-block;
+  margin-left: 20px;
+  width: 390px;
+  text-align: left; }
+
+.table-box .money-title {
+  color: #666; }
+
+.order_one_agree > input {
+  vertical-align: bottom; }
+
+.payment-now {
+  margin-left: 50px;
+  display: inline-block; }
+
+.course-detail.payment-detail {
+  font-size: 14px;
+  color: #666;
+  margin: 30px 0 50px 0;
+  padding: 0 10px; }
+
+.order_btn-box .order-btn {
+  padding: 5px 30px;
+  border-radius: 3px;
+  margin-left: 10px;
+  display: inline-block;
+  cursor: pointer; }
+
+.order-btn.re-back {
+  border: 1px solid #0085d0;
+  color: #0085d0; }
+
+.order-btn.goto-settlement {
+  background-color: #25B7FF;
+  color: #fff; }
+
+.order-center {
+  min-height: 600px;
+  min-height: calc(100% - 390px); }
+
+.box-title {
+  background-color: #e5eef9;
+  height: 50px;
+  line-height: 50px;
+  background-color: #f4f9ff;
+  padding-left: 30px; }
+
+.box-content {
+  margin: 30px; }
+
+.box-content i.color-theme {
+  color: #ef6d14;
+  font-size: 18px; }
+
+.order-detail-list {
+  border: 1px solid #eeeeee;
+  background-color: #fff;
+  margin-top: 20px;
+  font-size: 14px; }
+
+.payment-ico {
+  background-position: -81px -88px;
+  width: 19px;
+  height: 19px;
+  margin-right: 25px; }
+
+.payment-ico.selected-ico {
+  background-position: -108px -88px; }
+
+.payment-list {
+  margin-right: 100px;
+  cursor: pointer; }
+
+.buy-process-first > img {
+  margin-top: 20px; }
+
+.buy-process-first {
+  width: 635px;
+  margin: 20px auto 10px; }
+  .buy-process-first span {
+    display: block;
+    width: 50px;
+    height: 50px; }
+    .buy-process-first span.first-item {
+      background-position: -238px -417px; }
+    .buy-process-first span.second-item {
+      background-position: -384px -417px; }
+    .buy-process-first span.second-item.active {
+      background-position: -335px -417px; }
+    .buy-process-first span.last-item {
+      background-position: -484px -417px; }
+    .buy-process-first span.last-item.active {
+      background-position: -439px -417px; }
+
+.buy-process-second {
+  width: 685px;
+  margin: 0px auto 30px; }
+  .buy-process-second .first-item {
+    margin-right: 214px; }
+  .buy-process-second .second-item {
+    margin-right: 214px; }
+
+.box-content {
+  margin: 30px; }
+  .box-content .payment-list {
+    margin-right: 100px;
+    cursor: pointer; }
+  .box-content .payment-ico {
+    background-position: -81px -88px;
+    width: 19px;
+    height: 19px;
+    margin-right: 25px; }
+  .box-content .payment-ico.selected-ico {
+    background-position: -108px -88px; }
+
+.pay-center-box {
+  width: 670px;
+  margin: 0 auto; }
+  .pay-center-box .pay-bottom {
+    background-color: #fff;
+    padding: 40px; }
+  .pay-center-box .pay-bottom p.tc {
+    color: #999999;
+    margin-bottom: 15px; }
+  .pay-center-box .pay-bottom p.price-box {
+    color: #000;
+    font-size: 20px; }
+  .pay-center-box .er-we {
+    width: 300px;
+    height: 300px; }
+  .pay-center-box .bottom-box {
+    background-color: #25B7FF;
+    width: 204px;
+    margin: 0 auto;
+    color: #fff;
+    padding: 10px 20px; }
+  .pay-center-box .bottom-img {
+    width: 40px;
+    height: 40px;
+    vertical-align: middle; }
+  .pay-center-box .bottom-text {
+    line-height: 20px;
+    font-size: 12px;
+    text-align: left;
+    margin-left: 10px; }
+
+.succeed-box .pay-center-box .pay-bottom p.buy-title {
+  color: #000;
+  font-size: 22px; }
+
+.succeed-box .bg-ico.succeed-ico {
+  width: 200px;
+  height: 200px;
+  margin: 30px auto 0 auto;
+  left: 50%;
+  background-position: -38px -366px;
+  margin-left: -100px; }
+
+.succeed-box .back-detail {
+  width: 180px;
+  padding: 5px 0;
+  color: #fff;
+  background-color: #25B7FF;
+  text-align: center;
+  margin: 30px auto 20px auto;
+  border-radius: 3px; }

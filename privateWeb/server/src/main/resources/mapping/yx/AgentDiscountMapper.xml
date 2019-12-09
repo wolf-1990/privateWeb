@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.yx.AgentDiscountMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.yx.AgentDiscount">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="packageTypeId" jdbcType="INTEGER" property="packageTypeId" />
+    <result column="yearNum" jdbcType="INTEGER" property="yearNum" />
+    <result column="packageTypeName" jdbcType="VARCHAR" property="packageTypeName" />
+    <result column="accountingLevelId" jdbcType="INTEGER" property="accountingLevelId" />
+    <result column="accountingLevelName" jdbcType="VARCHAR" property="accountingLevelName" />
+    <result column="agentId" jdbcType="INTEGER" property="agentId" />
+    <result column="discount" jdbcType="DECIMAL" property="discount" />
+  </resultMap>
+  <insert id="insertBatch" >
+    INSERT INTO Agent_YunXiao_Discount (packageTypeId, packageTypeName,yearNum,accountingLevelId,
+      accountingLevelName,agentId,discount)
+    VALUES
+    <foreach collection="list" item="item" separator=",">
+      (#{item.packageTypeId},#{item.packageTypeName},#{item.yearNum},
+      #{item.accountingLevelId},#{item.accountingLevelName},#{item.agentId},#{item.discount})
+    </foreach>
+  </insert>
+  <select id="selectObjGroup" parameterType="java.lang.Integer"
+          resultType="com.zhongda.yunxiao.server.entity.response.AgentDiscountResponse">
+      select packageTypeId,packageTypeName,agentId from Agent_YunXiao_Discount where 1=1
+       and agentId = #{agentId}
+       group by packageTypeId,packageTypeName,agentId order by packageTypeId
+  </select>
+  <select id="selectObej" parameterType="com.zhongda.yunxiao.server.entity.yx.AgentDiscount"
+        resultType="com.zhongda.yunxiao.server.entity.response.DiscountYears">
+      select accountingLevelId,accountingLevelName,discount from Agent_YunXiao_Discount
+       where 1=1
+      and agentId = #{param.agentId}
+      and packageTypeId = #{param.packageTypeId}
+  </select>
+</mapper>

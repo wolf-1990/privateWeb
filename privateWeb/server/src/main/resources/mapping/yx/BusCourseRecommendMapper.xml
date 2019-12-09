@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.yx.BusCourseRecommendMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.yx.BusCourseRecommend">
+    <result column="course_id" jdbcType="NVARCHAR" property="courseId" />
+    <result column="rec_type" jdbcType="TINYINT" property="recType" />
+    <result column="sort" jdbcType="TINYINT" property="sort" />
+    <result column="agent_id" jdbcType="INTEGER" property="agentId" />
+    <result column="agentname" jdbcType="NVARCHAR" property="agentname" />
+    <result column="creator_id" jdbcType="NVARCHAR" property="creatorId" />
+    <result column="creator_name" jdbcType="NVARCHAR" property="creatorName" />
+    <result column="creation_time" jdbcType="TIMESTAMP" property="creationTime" />
+  </resultMap>
+</mapper>

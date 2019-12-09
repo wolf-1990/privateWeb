@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.yx.SubmitCheckRecordMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.yx.SubmitCheckRecord">
+    <id column="id" jdbcType="NCHAR" property="id" />
+    <result column="banner_num" jdbcType="INTEGER" property="bannerNum" />
+    <result column="news_num" jdbcType="INTEGER" property="newsNum" />
+    <result column="products_num" jdbcType="INTEGER" property="productsNum" />
+    <result column="count_num" jdbcType="INTEGER" property="countNum" />
+    <result column="agent_id" jdbcType="INTEGER" property="agentId" />
+    <result column="agentname" jdbcType="NVARCHAR" property="agentname" />
+    <result column="webName" jdbcType="NVARCHAR" property="webName" />
+    <result column="info_complete_state" jdbcType="TINYINT" property="infoCompleteState" />
+    <result column="creation_time" jdbcType="TIMESTAMP" property="creationTime"/>
+  </resultMap>
+ 
+  <update id="updateCheckNumByAgentId">
+    update submit_check_record
+    <set>
+      <if test="type==1">
+        banner_num=banner_num+#{banner},
+      </if>
+      <if test="type==2">
+        news_num=news_num+#{banner},
+      </if>
+      <if test="type==3">
+        products_num=products_num+#{banner},
+      </if>
+      <if test="type!=null">
+        count_num=count_num+#{banner},
+      </if>
+    </set>
+    where agent_id=#{agent.agentId} and agentname=#{agent.agentName}
+  </update>
+ 
+    <update id="updateInfoComepleteState">
+    update submit_check_record
+    set info_complete_state = #{completeState}
+    where agent_id=#{agentId}
+  </update>
+ 
+  <select id="selectCompleteInfoByAgentId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  select info_complete_state from submit_check_record where agent_id=#{agentId}
+  </select>
+ 
+  <select id="queryCheckAgentList" resultType="com.zhongda.yunxiao.server.entity.response.CheckAgentOut">
+    select agent_id,agentname agentName,webName,banner_num bannerCount,news_num newsCount,products_num productCount,count_num checkNum
+    from submit_check_record order by count_num desc ,creation_time desc
+  </select>
+ 
+  <update id="updateWebNameByCondition">
+    update submit_check_record set webName=#{webName} where agent_id=#{id}
+  </update>
+</mapper>

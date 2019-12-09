@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.products.BKCodeMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.products.BKCode">
+    <id column="Code" jdbcType="VARCHAR" property="code" />
+    <result column="SysClassId" jdbcType="CHAR" property="sysclassid" />
+    <result column="SysClassName" jdbcType="NVARCHAR" property="sysclassname" />
+    <result column="SysClassPath" jdbcType="VARCHAR" property="sysclasspath" />
+    <result column="KeState" jdbcType="TINYINT" property="kestate" />
+    <result column="Money" jdbcType="DECIMAL" property="money" />
+    <result column="KeId" jdbcType="VARCHAR" property="keid" />
+    <result column="CreateTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="AgentName" jdbcType="VARCHAR" property="agentname" />
+    <result column="AdUserName" jdbcType="VARCHAR" property="adusername" />
+    <result column="KeVerSion" jdbcType="TINYINT" property="keversion" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="Ordernumber" jdbcType="VARCHAR" property="ordernumber" />
+    <result column="UserTime" jdbcType="TIMESTAMP" property="usertime" />
+    <result column="Ip" jdbcType="VARCHAR" property="ip" />
+    <result column="FaUserName" jdbcType="NVARCHAR" property="fausername" />
+    <result column="faTime" jdbcType="TIMESTAMP" property="fatime" />
+    <result column="RefundTime" jdbcType="TIMESTAMP" property="refundtime" />
+    <result column="RefundUserName" jdbcType="NVARCHAR" property="refundusername" />
+    <result column="BanId" jdbcType="VARCHAR" property="banid" />
+    <result column="LogoutTime" jdbcType="TIMESTAMP" property="logouttime" />
+    <result column="LogoutUserName" jdbcType="VARCHAR" property="logoutusername" />
+    <result column="ThirdOrderNumber" jdbcType="VARCHAR" property="thirdordernumber" />
+    <result column="ThirdMoney" jdbcType="DECIMAL" property="thirdmoney" />
+    <result column="ThirdBZ" jdbcType="NVARCHAR" property="thirdbz" />
+    <result column="ProductExpireTime" jdbcType="TIMESTAMP" property="productexpiretime" />
+    <result column="ProductExpiresDays" jdbcType="INTEGER" property="productexpiresdays" />
+    <result column="DiscountMoney" jdbcType="DECIMAL" property="discountmoney" />
+    <result column="AgentOrderNumber" jdbcType="VARCHAR" property="agentordernumber" />
+    <result column="AgentUserName" jdbcType="NVARCHAR" property="agentusername" />
+    <result column="AgentId" jdbcType="INTEGER" property="agentid" />
+    <result column="BKCreateType" jdbcType="TINYINT" property="bkcreatetype" />
+    <result column="ExamName" jdbcType="NVARCHAR" property="examname" />
+    <result column="InitState" jdbcType="VARCHAR" property="initstate" />
+  </resultMap>
+  <!--<select id="queryClaCodeManage" resultType="com.zhongda.yunxiao.server.entity.response.AgentClaCodeOut">-->
+    <!--select ag.webName webName,count(code) amount,sum(Money) totalMoney,sum(DiscountMoney) discountAmount-->
+    <!--from [wangxiao2_users].[dbo].[Agent] ag-->
+    <!--left join [wangxiao2_products_bak].[dbo].BKCode bk on ag.agentname=bk.AgentName-->
+    <!--where ag.AgentType = 8-->
+    <!--<if test="param.webName != null and param.webName != ''">-->
+      <!--and  ag.webName=#{param.webName}-->
+    <!--</if>-->
+    <!--group by ag.webName-->
+  <!--</select>-->
+
+  <select id="queryDetailByAgentOrderNo" resultType="com.zhongda.yunxiao.server.entity.response.OrderCodeOut">
+    select code,Ordernumber stuOrderNumber
+    FROM BKCode where AgentOrderNumber=#{AgentOrderNumber}
+  </select>
+
+  <select id="queryOrgOrderAndCode" resultMap="BaseResultMap">
+    select *
+    from BKCode where AgentUserName=#{agent.agentName} and AgentId=#{agent.agentId} and AgentOrderNumber=#{AgentOrderNumber}
+  </select>
+
+  <select id="queryPriceByCode" resultMap="BaseResultMap">
+    select Code,KeId,Money,Ordernumber from BKCode where Code=#{code} and KeState=2
+  </select>
+</mapper>

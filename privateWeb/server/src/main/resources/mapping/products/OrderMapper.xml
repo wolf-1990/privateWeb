@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.products.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.products.Order">
+    <id column="OrderNumber" jdbcType="VARCHAR" property="ordernumber" />
+    <result column="money" jdbcType="DECIMAL" property="money" />
+    <result column="UseCardMoney" jdbcType="DECIMAL" property="usecardmoney" />
+    <result column="UseMFMoney" jdbcType="DECIMAL" property="usemfmoney" />
+    <result column="jf" jdbcType="INTEGER" property="jf" />
+    <result column="username" jdbcType="NVARCHAR" property="username" />
+    <result column="agentname" jdbcType="NVARCHAR" property="agentname" />
+    <result column="OrderStatus" jdbcType="TINYINT" property="orderstatus" />
+    <result column="SendStatus" jdbcType="TINYINT" property="sendstatus" />
+    <result column="PayStatus" jdbcType="TINYINT" property="paystatus" />
+    <result column="ReceiptStatus" jdbcType="TINYINT" property="receiptstatus" />
+    <result column="ReceiptDemand" jdbcType="TINYINT" property="receiptdemand" />
+    <result column="ReceiptTitle" jdbcType="NVARCHAR" property="receipttitle" />
+    <result column="ReceiptType" jdbcType="TINYINT" property="receipttype" />
+    <result column="OrderType" jdbcType="TINYINT" property="ordertype" />
+    <result column="PayType" jdbcType="TINYINT" property="paytype" />
+    <result column="hasReal" jdbcType="TINYINT" property="hasreal" />
+    <result column="consignee" jdbcType="NVARCHAR" property="consignee" />
+    <result column="address" jdbcType="NVARCHAR" property="address" />
+    <result column="postcode" jdbcType="VARCHAR" property="postcode" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="SysExpressId" jdbcType="INTEGER" property="sysexpressid" />
+    <result column="companyName" jdbcType="NVARCHAR" property="companyname" />
+    <result column="SysExpressNumber" jdbcType="VARCHAR" property="sysexpressnumber" />
+    <result column="SysExpressPrice" jdbcType="DECIMAL" property="sysexpressprice" />
+    <result column="LastUpdateTime" jdbcType="TIMESTAMP" property="lastupdatetime" />
+    <result column="CreateTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="RefundTime" jdbcType="TIMESTAMP" property="refundtime" />
+    <result column="confirmTime" jdbcType="TIMESTAMP" property="confirmtime" />
+    <result column="payTime" jdbcType="TIMESTAMP" property="paytime" />
+    <result column="PromiseTime" jdbcType="TIMESTAMP" property="promisetime" />
+    <result column="ReceiptOpenTime" jdbcType="TIMESTAMP" property="receiptopentime" />
+    <result column="CompleteTime" jdbcType="TIMESTAMP" property="completetime" />
+    <result column="CloseTime" jdbcType="TIMESTAMP" property="closetime" />
+    <result column="ExamId" jdbcType="VARCHAR" property="examid" />
+    <result column="ExamName" jdbcType="NVARCHAR" property="examname" />
+    <result column="OrderProductsType" jdbcType="TINYINT" property="orderproductstype" />
+    <result column="SysAreaId" jdbcType="INTEGER" property="sysareaid" />
+    <result column="PrintStatus" jdbcType="TINYINT" property="printstatus" />
+    <result column="YHSolutionIds" jdbcType="VARCHAR" property="yhsolutionids" />
+    <result column="YHGiveIds" jdbcType="NVARCHAR" property="yhgiveids" />
+    <result column="RelationOrderNumber" jdbcType="VARCHAR" property="relationordernumber" />
+    <result column="OrderFromType" jdbcType="TINYINT" property="orderfromtype" />
+    <result column="AppSysClassID" jdbcType="CHAR" property="appsysclassid" />
+    <result column="AppSign" jdbcType="VARCHAR" property="appsign" />
+    <result column="freeorderid" jdbcType="VARCHAR" property="freeorderid" />
+    <result column="freemoney" jdbcType="DECIMAL" property="freemoney" />
+    <result column="IsEvaluate" jdbcType="TINYINT" property="isevaluate" />
+    <result column="msrepl_tran_version" jdbcType="CHAR" property="msreplTranVersion" />
+    <result column="yhNumber" jdbcType="NVARCHAR" property="yhnumber" />
+    <result column="ExpiresTime" jdbcType="TIMESTAMP" property="expirestime" />
+    <result column="SEM_WordID" jdbcType="INTEGER" property="semWordid" />
+    <result column="SEM_ClickHistoryID" jdbcType="INTEGER" property="semClickhistoryid" />
+    <result column="SEM_Word" jdbcType="NVARCHAR" property="semWord" />
+    <result column="SchoolId" jdbcType="INTEGER" property="schoolid" />
+    <result column="Adminname" jdbcType="VARCHAR" property="adminname" />
+    <result column="LastVisitTime" jdbcType="TIMESTAMP" property="lastvisittime" />
+    <result column="NextVisitTime" jdbcType="TIMESTAMP" property="nextvisittime" />
+    <result column="ReplyCount" jdbcType="INTEGER" property="replycount" />
+    <result column="wxSMSStatus" jdbcType="TINYINT" property="wxsmsstatus" />
+    <result column="PrintImportTime" jdbcType="TIMESTAMP" property="printimporttime" />
+    <result column="PrintImportUserName" jdbcType="VARCHAR" property="printimportusername" />
+    <result column="IsCreatedProtocolPdf" jdbcType="BIT" property="iscreatedprotocolpdf" />
+    <result column="TAXID" jdbcType="NVARCHAR" property="taxid" />
+    <result column="RealName" jdbcType="NVARCHAR" property="realname" />
+    <result column="UserOrderType" jdbcType="TINYINT" property="userordertype" />
+    <result column="upgradeOrderNumber" jdbcType="VARCHAR" property="upgradeordernumber" />
+    <result column="DisStatus" jdbcType="TINYINT" property="disstatus" />
+    <result column="ReStudyType" jdbcType="TINYINT" property="restudytype" />
+    <result column="OrderFromModuleType" jdbcType="TINYINT" property="orderfrommoduletype" />
+  </resultMap>
+  
+
+  
+  <select id="queryStuOrder" resultType="com.zhongda.yunxiao.server.entity.response.QueryStuOrderOut">
+     select o.payTime ,
+     [productNames]=stuff((SELECT ','+ op.title from Order_Products op where op.OrderNumber=o.OrderNumber  FOR xml path('')),1,1,'')
+     from [Order] o,Order_Products op
+     where o.username=#{userName} and OrderStatus=2 and PayStatus!=0  and op.OrderNumber=o.OrderNumber
+     group by o.payTime,o.username,o.OrderNumber
+     order by o.payTime desc
+  </select>
+
+</mapper>

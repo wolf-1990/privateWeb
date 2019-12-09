@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.yx.StuFavoriteMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.yx.StuFavorite">
+    <result column="stu_id" jdbcType="NVARCHAR" property="stuId" />
+    <result column="stu_user_name" jdbcType="NVARCHAR" property="stuUserName" />
+    <result column="product_id" jdbcType="NVARCHAR" property="productId" />
+    <result column="agent_id" jdbcType="INTEGER" property="agentId" />
+    <result column="agentname" jdbcType="NVARCHAR" property="agentname" />
+    <result column="lastoperation_time" jdbcType="TIMESTAMP" property="lastoperationTime" />
+    <result column="product_name" jdbcType="NVARCHAR" property="productName" />
+    <result column="lesson_num" jdbcType="INTEGER" property="lessonNum" />
+  </resultMap>
+  <select id="queryFavoriteByCourse" resultMap="BaseResultMap">
+    select * from stu_favorite where stu_id=#{userId} and product_id=#{courseId} and agent_id=#{agentInfo.id}
+  </select>
+  <select id="selectStuFavCount" resultType="java.lang.Integer">
+  	select count(1) from stu_favorite
+  	where 1 = 1
+  	<if test="null!= stuId">
+  		and stu_id = #{stuId}
+  	</if>
+  	<if test="null!= proId">
+  		and product_id = #{proId}
+  	</if>
+  	<if test="null!= agentName">
+  		and agentname = #{agentName}
+  	</if>
+  </select>
+
+    <select id="queryFavorite" resultMap="BaseResultMap">
+      select top 1 * from stu_favorite where stu_id=#{sf.stuId} and product_id=#{sf.productId}
+    </select>
+
+    <delete id="deleteByCondition">
+        DELETE
+        FROM stu_favorite
+        WHERE stu_id = #{stuId} AND stu_user_name = #{stuUserName} AND product_id = #{productId} AND agent_id = #{agentId} AND agentname = #{agentname} AND product_name = #{productName} AND lesson_num = #{lessonNum};
+    </delete>
+</mapper>

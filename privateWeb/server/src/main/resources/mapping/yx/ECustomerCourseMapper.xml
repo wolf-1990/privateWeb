@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.yx.ECustomerCourseMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.yx.ECustomerCourse">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="parent_id" jdbcType="CHAR" property="parentId" />
+    <result column="level" jdbcType="TINYINT" property="level" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="product_id" jdbcType="CHAR" property="productId" />
+    <result column="course_id" jdbcType="CHAR" property="courseId" />
+    <result column="sys_class_id" jdbcType="CHAR" property="sysClassId" />
+    <result column="section_year" jdbcType="INTEGER" property="sectionYear" />
+    <result column="parent_title" jdbcType="VARCHAR" property="parentTitle" />
+    <result column="classHours_count" jdbcType="INTEGER" property="ClassHoursCount" />
+    <result column="sys_class_name" jdbcType="VARCHAR" property="sysClassName" />
+  </resultMap>
+</mapper>

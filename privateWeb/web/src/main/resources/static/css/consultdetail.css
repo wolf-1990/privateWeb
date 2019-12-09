@@ -1,0 +1,134 @@
+.nav-menu-down {
+  position: absolute;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.5);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4c000000,endColorstr=#4c000000); }
+
+.nav-box {
+  background-color: #fff; }
+
+.nav_right li a {
+  color: #333; }
+
+.nav_right .nav_active a {
+  color: #015eac; }
+
+.nav-box .search-box span {
+  color: #999; }
+
+.nav-box .search-box {
+  border: 1px solid #ccc; }
+
+.nav-box .search-box > span {
+  border-right: 1px solid #ccc; }
+
+.search-box #search-text {
+  color: #666; }
+
+.nav-box .search-box .course-down-ico {
+  background-position: -177px -14px; }
+
+.nav-box .search-box .course-up-ico {
+  background-position: -191px -14px; }
+
+.nav-box .search-box .serch-ico {
+  background-position: -51px -11px; }
+
+.nav-menu-down .course-type {
+  color: #fff; }
+
+.nav-menu-down a {
+  color: #fff; }
+
+.nav-menu-down {
+  height: 360px;
+  /*overflow-y: hidden;*/ }
+
+.nav-menu-down ul > li:hover {
+  background-color: #0085d0;
+  color: #fff; }
+
+.nav-menu-down ul > li:hover .course-type,
+.nav-menu-down ul > li:hover .course-subject a {
+  color: #fff; }
+
+.nav-menu-down ul > li#more-menu:hover .course-type,
+.nav-menu-down ul > li#more-menu:hover .course-subject a {
+  color: #fff; }
+
+.nav_left {
+  background-color: #0085d0;
+  line-height: 50px; }
+
+.nav-menu-down .ico-right {
+  background-position: -144px -14px; }
+
+.hot-choiceness {
+  font-size: 20px; }
+
+.nav-menu-down ul > li#more-menu:hover ul > li .ico-right {
+  background-position: -144px -14px; }
+
+.more-btn {
+  font-size: 16px;
+  color: #333;
+  position: absolute;
+  right: 0;
+  top: 12px; }
+
+body {
+  background-color: #fff; }
+
+.conslult-curmbus {
+  width: 100%;
+  background-color: #24B8FF;
+  padding: 10px 0; }
+
+.conslult-curmbus .center-box > a, .conslult-curmbus .center-box > span,
+.conslult-curmbus .center-box {
+  color: #fff; }
+
+.consult-artical .consult-title {
+  font-weight: 600;
+  font-size: 16px;
+  padding: 30px 0 20px 0; }
+
+.consult-artical .consult-release-time {
+  color: #aaa; }
+
+.consult-artical .consult-content {
+  padding: 30px 0;
+  line-height: 20px;
+  color: #666; }
+
+.new-box-consullist {
+  background-color: #f7f7f7;
+  margin: 30px 0  -30px 0;
+  overflow: hidden;
+  position: relative; }
+  .new-box-consullist .type-title {
+    border-bottom: none; }
+  .new-box-consullist .new-box-list {
+    padding: 20px 0; }
+  .new-box-consullist .new-box-list > ul .new-box-item {
+    margin-bottom: 10px; }
+    .new-box-consullist .new-box-list > ul .new-box-item.fl {
+      width: 50%; }
+      .new-box-consullist .new-box-list > ul .new-box-item.fl .news-title {
+        margin-right: 100px; }
+    .new-box-consullist .new-box-list > ul .new-box-item.rt {
+      width: 41%; }
+    .new-box-consullist .new-box-list > ul .new-box-item .circle {
+      width: 10px;
+      height: 10px;
+      display: inline-block;
+      background-color: #24B8FF;
+      border-radius: 50%;
+      margin-right: 10px; }
+  .new-box-consullist .news-title {
+    width: 460px;
+    display: inline-block;
+    height: 20px;
+    line-height: 18px;
+    font-size: 14px;
+    color: #666; }

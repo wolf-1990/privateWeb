@@ -1,0 +1,213 @@
+@charset "UTF-8";
+.nav-menu-down {
+  position: absolute;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.5);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4c000000,endColorstr=#4c000000); }
+
+.nav-box {
+  background-color: #fff; }
+
+.nav_right li a {
+  color: #333; }
+
+.nav_right .nav_active a {
+  color: #015eac; }
+
+.nav-box .search-box span {
+  color: #999; }
+
+.nav-box .search-box {
+  border: 1px solid #ccc; }
+
+.nav-box .search-box > span {
+  border-right: 1px solid #ccc; }
+
+.search-box #search-text {
+  color: #666; }
+
+.nav-box .search-box .course-down-ico {
+  background-position: -177px -14px; }
+
+.nav-box .search-box .course-up-ico {
+  background-position: -191px -14px; }
+
+.nav-box .search-box .serch-ico {
+  background-position: -51px -11px; }
+
+.nav-menu-down .course-type {
+  color: #fff; }
+
+.nav-menu-down a {
+  color: #fff; }
+
+.nav-menu-down {
+  height: 360px;
+  /*overflow-y: hidden;*/ }
+
+.nav-menu-down ul > li:hover {
+  background-color: #0085d0;
+  color: #fff; }
+
+.nav-menu-down ul > li:hover .course-type,
+.nav-menu-down ul > li:hover .course-subject a {
+  color: #fff; }
+
+.nav-menu-down ul > li#more-menu:hover .course-type,
+.nav-menu-down ul > li#more-menu:hover .course-subject a {
+  color: #fff; }
+
+.nav_left {
+  background-color: #0085d0;
+  line-height: 50px; }
+
+.nav-menu-down .ico-right {
+  background-position: -144px -14px; }
+
+.hot-choiceness {
+  font-size: 20px; }
+
+.nav-menu-down ul > li#more-menu:hover ul > li .ico-right {
+  background-position: -144px -14px; }
+
+.more-btn {
+  font-size: 16px;
+  color: #333;
+  position: absolute;
+  right: 0;
+  top: 12px; }
+
+.new-box-consullist {
+  margin: 50px 0  50px 0;
+  /* height: 70px; */
+  overflow: hidden;
+  position: relative; }
+
+.new-ico img {
+  width: 70px;
+  height: 70px; }
+
+.new-list-consullist {
+  width: 1200px;
+  /* height: 65px; */
+  margin-top: 7px;
+  overflow: hidden; }
+  .news-item{
+    margin: 10px 0px 10px 0px;
+    
+  }
+/*.news-item:nth-child(2n+1){
+	padding-left: 0;
+	padding-right: 160px;
+}*/
+.news-item .news-ico {
+  width: 25px;
+  height: 22px;
+  background-position: -121px -11px;
+  margin-left: 5px; }
+
+.news-item .news-time {
+  color: #989898;
+  font-size: 12px; }
+
+/* 滚屏通知 */
+.scrolling_annunciate {
+  width: 100%;
+  overflow: hidden;
+  height: 40px;
+  line-height: 40px;
+  background-color: #fff;
+  white-space: nowrap;
+  font-size: 14px; }
+
+.scrolling_annunciate .scrolling_scope {
+  display: inline-block; }
+
+.scrolling_annunciate ul {
+  display: inline-block; }
+
+.scrolling_annunciate li {
+  margin-left: 100px;
+  display: inline-block; }
+
+.scrolling_annunciate li span {
+  color: #e8482e; }
+
+.floating_window .fix-box-list.phone-box {
+  display: block; }
+
+.consult-list {
+  margin-left: -20px; }
+
+.consult-item {
+  margin: 30px 0 0 20px; }
+
+.consult-item:hover a {
+  border: 1px solid #0085d0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border-radius: 4px; }
+
+.consult-item:hover .consult-left img {
+  /*width: 287px;*/
+  transform: scale(1.2, 1.1);
+  -webkit-transform: scale(1.2, 1.1);
+  -o-transform: scale(1.2, 1.1);
+  -moz-transform: scale(1.2, 1.1); }
+
+.consult-item a {
+  padding: 8px;
+  display: inline-block;
+  background: #fff;
+  border: 1px solid #F4F7FC; }
+
+.consult-left {
+  height: 150px;
+  overflow: hidden; }
+
+.consult-item img {
+  width: 267px;
+  width: 267px;
+  transition: all .2s;
+  -moz-transition: all .2s;
+  -webkit-transition: all .2s;
+  -o-transition: all .2s; }
+
+.consult-right {
+  height: 150px;
+  width: 300px;
+  padding: 0 8px;
+  position: relative; }
+  .consult-right .consult-title {
+    color: #333;
+    font-size: 14px;
+    line-height: 36px;
+    height: 72px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; }
+  .consult-right .consult-desc-wrap {
+    height: 32px;
+    line-height: 32px;
+    font-size: 12px;
+    position: absolute;
+    bottom: 0;
+    left: 8px;
+    width: 100%; }
+    .consult-right .consult-desc-wrap .consult-tip {
+      color: #999;
+      font-size: 12px;
+      padding-left: 6px; }
+.conslult-curmbus{
+  background-color: #24B8FF;
+  padding: 10px 0;
+  color: #fff;
+}
+.conslult-curmbus a{
+  color: #fff;
+}

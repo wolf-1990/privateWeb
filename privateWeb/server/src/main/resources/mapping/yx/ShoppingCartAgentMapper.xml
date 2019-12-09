@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.yx.ShoppingCartAgentMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.yx.ShoppingCartAgent">
+    <id column="id" jdbcType="NCHAR" property="id" />
+    <result column="products_id" jdbcType="NVARCHAR" property="productsId" />
+    <result column="title" jdbcType="NVARCHAR" property="title" />
+    <result column="stu_id" jdbcType="NVARCHAR" property="stuId" />
+    <result column="stu_user_name" jdbcType="NVARCHAR" property="stuUserName" />
+    <result column="sys_class_id" jdbcType="NVARCHAR" property="sysClassId" />
+    <result column="sys_class_name" jdbcType="NVARCHAR" property="sysClassName" />
+    <result column="description" jdbcType="NVARCHAR" property="description" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="discount_price" jdbcType="DECIMAL" property="discountPrice" />
+    <result column="fact_price" jdbcType="DECIMAL" property="factPrice" />
+    <result column="creation_time" jdbcType="TIMESTAMP" property="creationTime" />
+    <result column="lastoperation_time" jdbcType="TIMESTAMP" property="lastoperationTime" />
+    <result column="agent_id" jdbcType="INTEGER" property="agentId" />
+    <result column="agentname" jdbcType="NVARCHAR" property="agentname" />
+  </resultMap>
+
+  <insert id="batchInsertCart">
+    insert into [wangxiao2_yunxiao].[dbo].[shoppping_cart_agent]
+    values
+    <foreach collection="params" item="param" separator=",">
+      (#{param.id},#{param.productsId},#{param.title},#{param.stuId},#{param.stuUserName},#{param.sysClassId},#{param.sysClassName},#{param.description},
+      #{param.price},#{param.discountPrice},#{param.factPrice},#{param.creationTime,jdbcType=DATE},#{param.lastoperationTime,jdbcType=DATE},#{param.agentId},#{param.agentname}
+      )
+    </foreach>
+
+  </insert>
+
+
+  <select id="queryAgentCartList" resultType="com.zhongda.yunxiao.server.entity.response.CartAgentOut">
+    select id,products_id,title,stu_user_name,sys_class_name,description,price,agentname,discount_price,fact_price
+    from [wangxiao2_yunxiao].[dbo].[shoppping_cart_agent]
+    where stu_id=#{id}
+  </select>
+
+  <delete id="deleteByProductsId">
+    delete from [wangxiao2_yunxiao].[dbo].[shoppping_cart_agent] where products_id=#{prodId}
+  </delete>
+
+  <select id="queryCartByProdIdAndStuId" resultMap="BaseResultMap">
+    select *
+    from [wangxiao2_yunxiao].[dbo].[shoppping_cart_agent]
+    where products_id in
+    <foreach collection="list" item="id" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+    and stu_id=#{stuId}
+  </select>
+
+  <select id="toPlaceOrder" resultType="com.zhongda.yunxiao.server.entity.response.CartAgentOut">
+    select products_id,title,stu_id,stu_user_name,price,discount_price
+    from [wangxiao2_yunxiao].[dbo].[shoppping_cart_agent]
+    where agent_id=#{agent.agentId} and agentname=#{agent.agentName}
+    and id = #{param.id} order by creation_time
+  </select>
+
+</mapper>

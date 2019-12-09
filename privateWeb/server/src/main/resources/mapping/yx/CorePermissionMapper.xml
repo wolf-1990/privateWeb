@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.yx.CorePermissionMapper">
+	<resultMap id="BaseResultMap"
+		type="com.zhongda.yunxiao.server.entity.yx.CorePermission">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="code" jdbcType="VARCHAR" property="code" />
+		<result column="type" jdbcType="TINYINT" property="type" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="url" jdbcType="VARCHAR" property="url" />
+		<result column="parent_id" jdbcType="INTEGER" property="parentId" />
+		<result column="sort" jdbcType="TINYINT" property="sort" />
+		<result column="is_delete" jdbcType="TINYINT" property="isDelete" />
+	</resultMap>
+	<select id="selectUserMenus" parameterType="java.util.List" resultMap="BaseResultMap">
+		SELECT 
+			cp.id id, cp.name, cp.url, cp.code, cp.parent_id 
+		FROM core_rolepermission crp 
+		LEFT JOIN core_permission cp on crp.permission_id = cp.id
+		WHERE crp.role_id IN
+		<foreach collection="list" open="(" close=")" separator="," item="roleId">
+			#{roleId,jdbcType=VARCHAR}
+		</foreach> 
+		ORDER BY cp.id
+	</select>
+	
+	<select id="selectAllMenu" resultMap="BaseResultMap">
+		SELECT 
+			cp.id id, cp.name, cp.url, cp.code, cp.parent_id 
+		FROM core_permission cp ORDER BY cp.id
+	</select>
+</mapper>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.yx.CoreResourceMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.yx.CoreResource">
+    <id column="id" jdbcType="NVARCHAR" property="id" />
+    <result column="biz_id" jdbcType="NVARCHAR" property="bizId" />
+    <result column="big_type" jdbcType="TINYINT" property="bigType" />
+    <result column="small_type" jdbcType="TINYINT" property="smallType" />
+    <result column="filename" jdbcType="NVARCHAR" property="filename" />
+    <result column="suffix" jdbcType="NVARCHAR" property="suffix" />
+    <result column="url" jdbcType="NVARCHAR" property="url" />
+    <result column="small_url" jdbcType="NVARCHAR" property="smallUrl" />
+    <result column="download_url" jdbcType="NVARCHAR" property="downloadUrl" />
+    <result column="sort" jdbcType="TINYINT" property="sort" />
+    <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
+    <result column="org_id" jdbcType="NVARCHAR" property="orgId" />
+  </resultMap>
+  
+  
+  <delete id="deleteResourcePic">
+    delete from core_resource
+    where biz_id=#{resource.bizId} and big_type=#{resource.bigType} and small_type=#{resource.smallType}
+  </delete>
+
+  <select id="queryUrlByCondition" resultType="java.lang.String">
+    select url
+    from core_resource
+    where biz_id=#{bizId} and big_type=#{bigType} and small_type=#{smallType} and is_delete = 0
+  </select>
+
+  <select id="queryUrlByAgentId" resultType="java.lang.String">
+    select url
+    from core_resource
+    where biz_id=#{bizId} and big_type=#{bigType} and small_type=#{smallType}
+  </select>
+  
+</mapper>

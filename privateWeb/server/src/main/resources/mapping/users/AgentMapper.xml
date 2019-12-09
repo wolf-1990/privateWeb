@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.users.AgentMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.users.Agent">
+    <id column="agentname" jdbcType="VARCHAR" property="agentName" />
+    <result column="ID" jdbcType="INTEGER" property="id" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="webName" jdbcType="NVARCHAR" property="webName" />
+    <result column="webUrl" jdbcType="VARCHAR" property="webUrl" />
+    <result column="webInfo" jdbcType="NVARCHAR" property="webInfo" />
+    <result column="contacts" jdbcType="NVARCHAR" property="contacts" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="isInvoice" jdbcType="TINYINT" property="isInvoice" />
+    <result column="area" jdbcType="NVARCHAR" property="area" />
+    <result column="SysAreaId" jdbcType="INTEGER" property="sysAreaId" />
+    <result column="address" jdbcType="NVARCHAR" property="address" />
+    <result column="postcode" jdbcType="VARCHAR" property="postcode" />
+    <result column="qq" jdbcType="VARCHAR" property="qq" />
+    <result column="openBank" jdbcType="NVARCHAR" property="openBank" />
+    <result column="bankCardNumber" jdbcType="VARCHAR" property="bankCardNumber" />
+    <result column="bankAccountName" jdbcType="NVARCHAR" property="bankAccountName" />
+    <result column="IDCardNumber" jdbcType="VARCHAR" property="IDCardNumber" />
+    <result column="AgentType" jdbcType="TINYINT" property="agentType" />
+    <result column="StudyAgentType" jdbcType="TINYINT" property="studyAgentType" />
+    <result column="StudyAgentLv" jdbcType="NVARCHAR" property="studyAgentLv" />
+    <result column="WmAgentLv" jdbcType="NVARCHAR" property="wmAgentLv" />
+    <result column="AgentStatus" jdbcType="TINYINT" property="agentStatus" />
+    <result column="CreateTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="lastLoginTime" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="lastLoginIp" jdbcType="VARCHAR" property="lastLoginIp" />
+    <result column="StationAgentLv" jdbcType="NVARCHAR" property="stationAgentLv" />
+    <result column="StrategyAgentLv" jdbcType="VARCHAR" property="strategyAgentLv" />
+    <result column="accountmoney" jdbcType="DECIMAL" property="accountmoney" />
+    <result column="sessionkey" jdbcType="VARCHAR" property="sessionkey" />
+    <result column="lastsynctime" jdbcType="TIMESTAMP" property="lastsynctime" />
+    <result column="fromtype" jdbcType="TINYINT" property="fromtype" />
+    <result column="AppKey" jdbcType="VARCHAR" property="appKey" />
+    <result column="AppSecret" jdbcType="VARCHAR" property="appsecret" />
+    <result column="AgentRank" jdbcType="VARCHAR" property="agentRank" />
+    <result column="IsNeedThirdOrder" jdbcType="TINYINT" property="isNeedThirdOrder" />
+    <result column="alias" jdbcType="NVARCHAR" property="alias" />
+    <result column="SearchFromType" jdbcType="TINYINT" property="searchFromType" />
+    <result column="BZ" jdbcType="NVARCHAR" property="bz" />
+    <result column="StartPayStatus" jdbcType="TINYINT" property="startPayStatus" />
+    <result column="companyTel" jdbcType="VARCHAR" property="companyTel" />
+    <result column="validityStartTime" jdbcType="TIMESTAMP" property="validityStartTime" />
+    <result column="validityEndTime" jdbcType="TIMESTAMP" property="validityEndTime" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, agentname, webName,webUrl,webInfo,contacts,mobile,area,SysAreaId,address,openBank,bankCardNumber,bankAccountName,
+    AgentStatus,accountingLevelId,BZ
+  </sql>
+
+  <select id="queryYXAgentList" resultMap="BaseResultMap">
+    select id,agentname,webName,validityStartTime,validityEndTime from Agent where delFlag = 1 AND AgentType = 8
+  </select>
+
+  <select id="selectByObj" parameterType="com.zhongda.yunxiao.server.entity.request.AgentRequest"
+          resultType="com.zhongda.yunxiao.server.entity.response.AgentResponse">
+    select
+    <include refid="Base_Column_List"/>
+    from Agent
+    where delFlag = 1 AND AgentType = 8
+    <if test="agentRequest.agentStatus != null" >
+      and AgentStatus = #{agentRequest.agentStatus,jdbcType=INTEGER}
+    </if>
+    <if test="agentRequest.agentName != null and agentRequest.agentName != ''" >
+      and (
+      agentname like '%'+#{agentRequest.agentName}+'%'
+      or webName like '%'+#{agentRequest.agentName}+'%'
+      )
+    </if>
+    order by CreateTime desc
+  </select>
+
+
+  <select id="querySchoolDecorationInfo" resultType="com.zhongda.yunxiao.server.entity.yx.SchoolDecorationInfo">
+      select webName,companyName,SysAreaId,address,mobile,qq,email,companyTel
+      from Agent
+      where 1=1 and AgentStatus = 1 and delFlag=1 and id=#{id}
+
+    </select>
+    
+  <select id="queryOrderAgentList" parameterType="com.zhongda.yunxiao.server.entity.request.CheckAgentIn" resultType="com.zhongda.yunxiao.server.entity.response.OrderAgentOut">
+     select a.ID id,a.webName,a.agentName
+    from Agent a
+    where a.AgentStatus =1  and  a.delFlag = 1 and AgentType = 8
+    <if test="agentName!=null and agentName!=''">
+       and a.webName like '%'+#{agentName}+'%'
+    </if>
+    group by a.ID,a.webName,a.CreateTime,a.agentname
+    order by a.CreateTime desc
+  </select>
+
+  <update id="updateByAgentname">
+    UPDATE Agent
+    <set>
+    <if test="webName !=null and webName!=''">
+      webName = #{webName},
+    </if>
+    <if test="email !=null and email!=''">
+      email = #{email},
+    </if>
+    <if test="mobile !=null and mobile!=''">
+      mobile = #{mobile},
+    </if>
+    <if test="area !=null and area!=''">
+      area = #{area},
+    </if>
+    <if test="sysAreaId != null">
+      SysAreaId = #{sysAreaId},
+    </if>
+    <if test="qq !=null and qq!=''">
+      qq = #{qq},
+    </if>
+    <if test="companyName !=null and companyName!=''">
+      companyName = #{companyName},
+    </if>
+    <if test="companyTel !=null and companyTel!=''">
+      companyTel = #{companyTel},
+    </if>
+    </set>
+    WHERE agentname = #{agentName}
+  </update>
+  <select id="getLikeUrl" parameterType="com.zhongda.yunxiao.server.entity.users.Agent"
+      resultMap="BaseResultMap">
+      select id,agentname,webName,webUrl,address,email,companyName,qq,mobile,companyTel from Agent
+      where AgentType = 8 AND delFlag = 1 and webUrl like '%'+#{param.webUrl}+'%'
+  </select>
+
+
+
+  <select id="queryAgentByAgent" resultMap="BaseResultMap">
+    select * from Agent where id=#{agent.agentId} and agentname=#{agent.agentName}
+  </select>
+  <select id="selectAllAgentAccount" parameterType="com.zhongda.yunxiao.server.entity.request.AgentAccountIn" resultType="map">
+  	SELECT COUNT(1) agentNum,SUM(a.cooperationCost) agentMoney 
+  	FROM Agent a WHERE a.AgentType = 8 AND a.delFlag = 1 
+  	<if test="null != param.startDate">
+   		AND a.validityStartTime &gt; #{param.startDate}
+   	</if>
+   	<if test="null != param.endDate">
+   		AND a.validityEndTime &lt; #{param.endDate}
+   	</if>
+  </select>
+  <select id="selectAgentNumMoneyAccount" parameterType="com.zhongda.yunxiao.server.entity.request.AgentAccountIn" resultType="com.zhongda.yunxiao.server.entity.bean.AgentAccount">
+  	SELECT
+    	convert(varchar(6), a.validityStartTime,112) as month,
+    	SUM(a.cooperationCost) saleMoney,
+    	COUNT(1) count
+    FROM Agent a WHERE a.AgentType = 8 AND a.delFlag = 1 
+  	<if test="null != param.startDate">
+   		AND a.validityStartTime &gt; #{param.startDate}
+   	</if>
+   	<if test="null != param.endDate">
+   		AND a.validityEndTime &lt; #{param.endDate}
+   	</if>
+   	GROUP BY convert(varchar(6), a.validityStartTime,112)
+  </select>
+  <select id="selectAgentNumAccountByArea" parameterType="com.zhongda.yunxiao.server.entity.request.AgentAccountIn" resultType="com.zhongda.yunxiao.server.entity.bean.AgentAccount">
+  	SELECT 
+  		a.area areaName,COUNT(1) as count 
+  	FROM Agent a WHERE a.AgentType = 8 AND a.delFlag = 1
+  	<if test="null != param.startDate">
+   		AND a.validityStartTime &gt; #{param.startDate}
+   	</if>
+   	<if test="null != param.endDate">
+   		AND a.validityEndTime &lt; #{param.endDate}
+   	</if>
+   	GROUP BY a.area
+  </select>
+
+  <select id="queryWebNameByName" resultType="java.lang.String">
+    select companyName webName from Agent
+    where AgentType = 8 and agentname = #{agentName} and AgentStatus=1
+  </select>
+	<update id="updateByAgentId" parameterType="com.zhongda.yunxiao.server.entity.users.Agent">
+		update Agent set password = #{param.password} where ID = #{param.id} and AgentType = 8
+	</update>
+
+  <select id="queryAgentNameById" resultType="java.lang.String">
+    select agentname from Agent where ID=#{agentId}
+  </select>
+
+  <select id="queryAgentByAgentId" resultType="java.lang.String">
+    select webName from Agent where ID=#{param.agentId} and AgentType = 8 and delFlag = 1
+  </select>
+
+  <update id="updateAreaById">
+    update Agent set area=#{area} where ID=#{id} and AgentType = 8
+  </update>
+</mapper>

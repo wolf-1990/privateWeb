@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.products.ClassHoursMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.products.ClassHours">
+    <id column="Id" jdbcType="CHAR" property="id" />
+    <result column="video" jdbcType="VARCHAR" property="video" />
+    <result column="SysTeacherId" jdbcType="CHAR" property="systeacherid" />
+    <result column="TeacherName" jdbcType="NVARCHAR" property="teachername" />
+    <result column="SysClassId" jdbcType="CHAR" property="sysclassid" />
+    <result column="SysChapterId" jdbcType="CHAR" property="syschapterid" />
+    <result column="SysChapterPath" jdbcType="VARCHAR" property="syschapterpath" />
+    <result column="ClassHoursType" jdbcType="TINYINT" property="classhourstype" />
+    <result column="videoLength" jdbcType="INTEGER" property="videolength" />
+    <result column="VideoStatus" jdbcType="TINYINT" property="videostatus" />
+    <result column="VideoUnique" jdbcType="NVARCHAR" property="videounique" />
+    <result column="VideoId" jdbcType="VARCHAR" property="videoid" />
+    <result column="Doc" jdbcType="NVARCHAR" property="doc" />
+    <result column="ClassHoursStatus" jdbcType="TINYINT" property="classhoursstatus" />
+    <result column="Flowers" jdbcType="INTEGER" property="flowers" />
+    <result column="Goods" jdbcType="INTEGER" property="goods" />
+    <result column="Poors" jdbcType="INTEGER" property="poors" />
+    <result column="Fuser" jdbcType="NVARCHAR" property="fuser" />
+    <result column="Guser" jdbcType="NVARCHAR" property="guser" />
+    <result column="Puser" jdbcType="NVARCHAR" property="puser" />
+    <result column="examQuestionsIds" jdbcType="NVARCHAR" property="examquestionsids" />
+    <result column="StyleNum" jdbcType="TINYINT" property="stylenum" />
+    <result column="sectionyear" jdbcType="INTEGER" property="sectionyear" />
+    <result column="ParentId" jdbcType="CHAR" property="parentid" />
+    <result column="Title" jdbcType="NVARCHAR" property="title" />
+    <result column="Sort" jdbcType="INTEGER" property="sort" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="oldId" jdbcType="VARCHAR" property="oldid" />
+    <result column="CreateTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="ParentClassHoursId" jdbcType="CHAR" property="parentclasshoursid" />
+    <result column="IsNnlimitedKe" jdbcType="TINYINT" property="isnnlimitedke" />
+    <result column="jiangyi" jdbcType="VARCHAR" property="jiangyi" />
+    <result column="TimeStatus" jdbcType="TINYINT" property="timestatus" />
+    <result column="OldClassHoursId" jdbcType="CHAR" property="oldclasshoursid" />
+    <result column="jiangyiHtml" jdbcType="NVARCHAR" property="jiangyihtml" />
+    <result column="UnlockWay" jdbcType="TINYINT" property="unlockway" />
+    <result column="OnlineTime" jdbcType="TIMESTAMP" property="onlinetime" />
+    <result column="FreeLength" jdbcType="INTEGER" property="freelength" />
+    <result column="OriginalFile" jdbcType="VARCHAR" property="originalfile" />
+  </resultMap>
+</mapper>

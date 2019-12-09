@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.yx.BusFaceCourseMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.yx.BusFaceCourse">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="code" jdbcType="CHAR" property="code" />
+    <result column="lesson_num" jdbcType="INTEGER" property="lessonNum" />
+    <result column="sort" jdbcType="TINYINT" property="sort" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
+    <result column="creator_id" jdbcType="CHAR" property="creatorId" />
+    <result column="creator_name" jdbcType="VARCHAR" property="creatorName" />
+    <result column="creation_time" jdbcType="TIMESTAMP" property="creationTime" />
+    <result column="lastoperator_name" jdbcType="VARCHAR" property="lastoperatorName" />
+    <result column="lastoperation_time" jdbcType="TIMESTAMP" property="lastoperationTime" />
+    <result column="agent_id" jdbcType="INTEGER" property="agentId" />
+    <result column="agentname" jdbcType="VARCHAR" property="agentname" />
+    <result column="check_status" jdbcType="TINYINT" property="checkStatus" />
+    <result column="check_id" jdbcType="CHAR" property="checkId" />
+    <result column="check_time" jdbcType="TIMESTAMP" property="checkTime" />
+    <result column="check_description" jdbcType="VARCHAR" property="checkDescription" />
+    <result column="begin_time" jdbcType="TIMESTAMP" property="beginTime" />
+    <result column="lastoperator_id" jdbcType="VARCHAR" property="lastoperatorId" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="submit_time" jdbcType="TIMESTAMP" property="submitTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zhongda.yunxiao.server.entity.yx.BusFaceCourse">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+
+  <select id="queryBusFaceCourseList" resultType="com.zhongda.yunxiao.server.entity.response.BusFaceCourseOut">
+    select id,title,code,creation_time,begin_time,check_status,status
+    from bus_face_course
+    where agent_id=#{agentId} and is_delete=0
+    <if test="null != param.title and param.title != ''">
+      and title = #{param.title}
+    </if>
+    order by begin_time desc
+  </select>
+
+  <select id="queryAgentGoodsList" resultType="com.zhongda.yunxiao.server.entity.response.AgentGoodsAuditOut">
+      select id,title,submit_time,check_time,check_status
+      from bus_face_course
+      where is_delete=0 and check_status>1 and agent_id = #{param.agentId}
+      order by check_status asc
+    </select>
+
+  <select id="queryCheckCourseCount" resultType="com.zhongda.yunxiao.server.entity.yx.CountCla">
+    select agent_id, count(id) num
+    from bus_face_course
+    where check_status=2 and is_delete=0 and agent_id in
+    <foreach collection="ids" item="id" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+    group by agent_id
+  </select>
+
+  <select id="querySelfCourseDetail" resultType="com.zhongda.yunxiao.server.entity.yx.NewBuildGoods">
+    select id,title,begin_time,lesson_num,content
+    from bus_face_course
+    where id=#{id} and is_delete=0
+    <!--<if test="type!=0">-->
+      <!--and status=2 and check_status=3-->
+    <!--</if>-->
+  </select>
+</mapper>

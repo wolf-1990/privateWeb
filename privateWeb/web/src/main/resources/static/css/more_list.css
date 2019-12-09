@@ -1,0 +1,170 @@
+#content > .min-center-width {
+  padding: 20px 0 100px; }
+  #content > .min-center-width > #crumbs {
+    margin-top: 15px; }
+  #content > .min-center-width > #exam-title {
+    margin-top: 20px; }
+    #content > .min-center-width > #exam-title > span {
+      display: inline-block;
+      margin: 8px 10px 0 0;
+      font-size: 18px;
+      font-weight: bold;
+      vertical-align: middle; }
+    #content > .min-center-width > #exam-title > .tab-exam-btn {
+      display: inline-block;
+      margin: 8px 0 0 0;
+      font-size: 14px;
+      color: #5B95F4;
+      vertical-align: middle; }
+    #content > .min-center-width > #exam-title > .href-scope {
+      float: right; }
+      #content > .min-center-width > #exam-title > .href-scope > a {
+        display: inline-block;
+        margin-left: 15px;
+        padding: 5px 20px;
+        height: 30px;
+        line-height: 30px;
+        font-size: 14px;
+        color: #666;
+        border-radius: 30px;
+        background-color: #e8e8e8; }
+  #content > .min-center-width > #examAll-type {
+    margin-top: 15px;
+    padding: 0 20px;
+    background-color: #fff; }
+    #content > .min-center-width > #examAll-type > .border {
+      border-bottom: 1px solid #eee; }
+    #content > .min-center-width > #examAll-type > .subject {
+      font-size: 14px; }
+      #content > .min-center-width > #examAll-type > .subject > p {
+        float: left;
+        margin-top: 10px;
+        width: 80px;
+        color: #999; }
+      #content > .min-center-width > #examAll-type > .subject > li {
+        float: left;
+        margin-right: -20px;
+        width: 1078px; }
+        #content > .min-center-width > #examAll-type > .subject > li > a {
+          display: inline-block;
+          color: #666;
+          margin: 10px 20px 10px 0; }
+  #content > .min-center-width > #module-more {
+    margin-top: 40px; }
+    #content > .min-center-width > #module-more > .more-list {
+      width: 930px;
+      display: inline-block;
+      background-color: #fff;
+      vertical-align: top; }
+      #content > .min-center-width > #module-more > .more-list > li {
+        padding: 15px 20px;
+        border-bottom: 1px solid #EEE; }
+        #content > .min-center-width > #module-more > .more-list > li:hover .title {
+          color: #F03932; }
+        #content > .min-center-width > #module-more > .more-list > li:hover .right-scope > a {
+          color: #fff;
+          background-color: #FF9408; }
+        #content > .min-center-width > #module-more > .more-list > li > .left-scope {
+          display: inline-block;
+          width: 785px;
+          vertical-align: middle; }
+          #content > .min-center-width > #module-more > .more-list > li > .left-scope > .title {
+            width: 700px;
+            font-size: 18px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap; }
+          #content > .min-center-width > #module-more > .more-list > li > .left-scope > .item-msg {
+            margin-top: 8px;
+            font-size: 14px;
+            color: #999; }
+            #content > .min-center-width > #module-more > .more-list > li > .left-scope > .item-msg > span:last-of-type {
+              margin-left: 20px; }
+        #content > .min-center-width > #module-more > .more-list > li > .right-scope {
+          display: inline-block;
+          vertical-align: middle; }
+          #content > .min-center-width > #module-more > .more-list > li > .right-scope > a {
+            display: inline-block;
+            width: 94px;
+            height: 32px;
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+            line-height: 32px;
+            background: #f4f4f4;
+            border: 1px solid #dddddd;
+            border-radius: 5px; }
+    #content > .min-center-width > #module-more > .height-list {
+      width: 930px;
+      display: inline-block;
+      vertical-align: top; }
+      #content > .min-center-width > #module-more > .height-list > .easy-error {
+        margin-top: 25px; }
+      #content > .min-center-width > #module-more > .height-list > .easy-test, #content > .min-center-width > #module-more > .height-list .easy-error {
+        padding: 20px 20px 0;
+        background-color: #fff; }
+        #content > .min-center-width > #module-more > .height-list > .easy-test > div > p, #content > .min-center-width > #module-more > .height-list .easy-error > div > p {
+          display: inline-block; }
+          #content > .min-center-width > #module-more > .height-list > .easy-test > div > p > img, #content > .min-center-width > #module-more > .height-list .easy-error > div > p > img {
+            vertical-align: middle; }
+          #content > .min-center-width > #module-more > .height-list > .easy-test > div > p > span, #content > .min-center-width > #module-more > .height-list .easy-error > div > p > span {
+            font-size: 18px;
+            vertical-align: middle; }
+        #content > .min-center-width > #module-more > .height-list > .easy-test > div > a, #content > .min-center-width > #module-more > .height-list .easy-error > div > a {
+          float: right;
+          width: 94px;
+          height: 32px;
+          background: #f03932;
+          border-radius: 5px;
+          text-align: center;
+          line-height: 32px; }
+        #content > .min-center-width > #module-more > .height-list > .easy-test > li, #content > .min-center-width > #module-more > .height-list .easy-error > li {
+          padding: 15px 0 15px 8px;
+          border-top: 1px solid #eeeeee; }
+          #content > .min-center-width > #module-more > .height-list > .easy-test > li > .exam-ent, #content > .min-center-width > #module-more > .height-list .easy-error > li > .exam-ent {
+            display: inline-block;
+            width: 803px;
+            vertical-align: middle; }
+            #content > .min-center-width > #module-more > .height-list > .easy-test > li > .exam-ent > .title > i, #content > .min-center-width > #module-more > .height-list .easy-error > li > .exam-ent > .title > i {
+              display: inline-block;
+              width: 4px;
+              height: 4px;
+              background: #f03932;
+              border-radius: 50%;
+              vertical-align: middle; }
+            #content > .min-center-width > #module-more > .height-list > .easy-test > li > .exam-ent > .title > span, #content > .min-center-width > #module-more > .height-list .easy-error > li > .exam-ent > .title > span {
+              padding-left: 20px;
+              display: inline-block;
+              vertical-align: middle;
+              width: 600px;
+              color: #333; }
+            #content > .min-center-width > #module-more > .height-list > .easy-test > li > .exam-ent > .progress, #content > .min-center-width > #module-more > .height-list .easy-error > li > .exam-ent > .progress {
+              padding-left: 30px;
+              margin-top: 8px;
+              font-size: 14px;
+              color: #999; }
+          #content > .min-center-width > #module-more > .height-list > .easy-test > li > a, #content > .min-center-width > #module-more > .height-list .easy-error > li > a {
+            font-size: 14px; }
+    #content > .min-center-width > #module-more > .more-type {
+      margin-left: 19px;
+      display: inline-block;
+      vertical-align: top;
+      width: 245px;
+      background-color: #fff;
+      text-align: center; }
+      #content > .min-center-width > #module-more > .more-type > li {
+        padding: 10px 0; }
+        #content > .min-center-width > #module-more > .more-type > li.more-type-active {
+          background-color: #FFF !important; }
+          #content > .min-center-width > #module-more > .more-type > li.more-type-active > a {
+            color: #F03932 !important; }
+        #content > .min-center-width > #module-more > .more-type > li:hover {
+          background-color: #F03932; }
+          #content > .min-center-width > #module-more > .more-type > li:hover > a {
+            color: #fff; }
+        #content > .min-center-width > #module-more > .more-type > li > a {
+          display: inline-block;
+          width: 100%;
+          height: 100%; }
+  #content > .min-center-width > #page {
+    padding-top: 50px; }

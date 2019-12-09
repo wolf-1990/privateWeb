@@ -1,0 +1,385 @@
+.nav-menu-down {
+  position: absolute;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.5);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4c000000,endColorstr=#4c000000); }
+
+.nav-box {
+  background-color: #fff;
+  border-bottom: 4px solid  #25B7FF; }
+
+.nav_right li a {
+  color: #333; }
+
+.nav_right .nav_active a {
+  color: #015eac; }
+
+.nav-box .search-box span {
+  color: #999; }
+
+.nav-box .search-box {
+  border: 1px solid #ccc; }
+
+.nav-box .search-box > span {
+  border-right: 1px solid #ccc; }
+
+.search-box #search-text {
+  color: #666; }
+
+.nav-box .search-box .course-down-ico {
+  background-position: -177px -14px; }
+
+.nav-box .search-box .course-up-ico {
+  background-position: -191px -14px; }
+
+.nav-box .search-box .serch-ico {
+  background-position: -51px -11px; }
+
+.nav-menu-down .course-type {
+  color: #fff; }
+
+.nav-menu-down a {
+  color: #fff; }
+
+.nav-menu-down {
+  height: 360px;
+  /*overflow-y: hidden;*/ }
+
+.nav-menu-down ul > li:hover {
+  background-color: #0085d0;
+  color: #fff; }
+
+.nav-menu-down ul > li:hover .course-type,
+.nav-menu-down ul > li:hover .course-subject a {
+  color: #fff; }
+
+.nav-menu-down ul > li#more-menu:hover .course-type,
+.nav-menu-down ul > li#more-menu:hover .course-subject a {
+  color: #fff; }
+
+.nav_left {
+  background-color: #0085d0;
+  line-height: 50px; }
+
+.nav-menu-down .ico-right {
+  background-position: -144px -14px; }
+
+.hot-choiceness {
+  font-size: 20px; }
+
+.nav-menu-down ul > li#more-menu:hover ul > li .ico-right {
+  background-position: -144px -14px; }
+
+.more-btn {
+  font-size: 16px;
+  color: #333;
+  position: absolute;
+  right: 0;
+  top: 12px; }
+
+.teacher-list li.type-item {
+  width: 216px;
+  margin: 30px 30px 0 0px; }
+
+.teacher-list .type-box {
+  margin-right: -30px; }
+
+.banner-box .center-box {
+  position: relative; }
+
+.nav-menu-down {
+  left: 0; }
+
+.more-btn {
+  font-size: 16px;
+  color: #333;
+  position: absolute;
+  right: 0;
+  top: 12px; }
+
+.personal_center_right.layui-tab-title, .personal_center_right .layui-tab-title {
+  height: 42px;
+  border-bottom: 1px solid #cbcbcb; }
+
+.personal_center_right .layui-tab-title .layui-this, .personal_center_right .layui-tab-title .layui-this {
+  background-color: #fff;
+  border-top: 2px solid #0085d0; }
+
+.personal_center_right .layui-tab-title li {
+  height: 41px;
+  line-height: 41px;
+  width: 120px; }
+
+.personal_center_right .layui-tab-title li, .personal_center_right .layui-tab-title li {
+  margin-right: 10px;
+  padding: 0 35px;
+  border: 1px solid #d7d7d7;
+  border-bottom: none; }
+
+.layui-tab-title .layui-this:after {
+  border: 0; }
+
+.my-personalinfor-content {
+  border: 1px solid #eeeeee;
+  background-color: #fff;
+  width: 100%;
+  padding: 30px;
+  margin-top: 10px; }
+
+.layui-tab-content {
+  padding: 0; }
+
+.my-personalinfor-content .alter_msg li {
+  margin-top: 20px; }
+
+.my-personalinfor-content .alter_msg li {
+  margin-top: 20px; }
+
+.my-personalinfor-content .alter_msg li {
+  margin-top: 20px; }
+
+.my-personalinfor-content .alter_msg li {
+  margin-top: 20px; }
+
+.my-personalinfor-content .alter_msg li p {
+  display: inline-block;
+  color: #000;
+  width: 100px;
+  text-align: right; }
+
+.default-title {
+  height: 100px;
+  line-height: 100px; }
+
+.default-box {
+  margin-left: 40px;
+  width: 100px;
+  height: 100px;
+  position: relative; }
+
+.default-box img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%; }
+
+.edit-img {
+  position: absolute;
+  left: 0;
+  top: 0; }
+
+.my-personalinfor-content .alter_msg li > input {
+  padding-left: 10px;
+  margin-left: 30px;
+  width: 350px;
+  height: 40px;
+  border: 1px solid #d9d9d9;
+  color: #bcbcbc;
+  display: inline-block; }
+
+.student-num {
+  margin-left: 30px; }
+
+.my-personalinfor-content .alter_msg li p {
+  display: inline-block;
+  color: #000;
+  width: 100px;
+  text-align: right; }
+
+.sex-title {
+  height: 36px;
+  line-height: 36px; }
+
+.layui-form-pane .layui-input-block {
+  margin-left: 30px; }
+
+.my-personalinfor-content .xg_msg_btn {
+  margin: 40px 0 60px 133px;
+  display: inline-block;
+  width: 130px;
+  height: 35px;
+  border: 1px solid #0085d0;
+  font-size: 16px;
+  text-align: center;
+  line-height: 35px;
+  cursor: pointer;
+  border-radius: 4px; }
+
+.my-personalinfor-content .xg_msg_btn a {
+  color: #0085d0; }
+
+.my-personalinfor-content .alter_msg_btn {
+  margin: 40px 0 60px 52px;
+  display: inline-block;
+  width: 130px;
+  height: 35px;
+  background-color: #0085d0;
+  font-size: 16px;
+  color: #fff;
+  text-align: center;
+  line-height: 35px;
+  cursor: pointer;
+  border-radius: 4px; }
+
+.my-personalinfor-content .alter_psd li {
+  color: #999;
+  height: 40px;
+  line-height: 40px; }
+
+.my-personalinfor-content .alter_psd li p {
+  display: inline-block;
+  color: #000;
+  width: 100px;
+  text-align: right; }
+
+.my-personalinfor-content .alter_psd li input {
+  padding-left: 10px;
+  margin-left: 30px;
+  width: 350px;
+  height: 40px;
+  border: 1px solid #d9d9d9;
+  vertical-align: middle; }
+
+.my-personalinfor-content .alter_psd_btn {
+  margin: 40px 0 60px 135px;
+  width: 130px;
+  height: 35px;
+  background-color: #0085d0;
+  font-size: 16px;
+  color: #fff;
+  text-align: center;
+  line-height: 35px;
+  cursor: pointer;
+  border-radius: 4px; }
+
+.alter_psd_btn .layui-btn {
+  width: 100%;
+  background-color: #0085d0; }
+
+.shadow-message .layui-upload {
+  width: 400px;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  margin-left: -200px;
+  background-color: #fff;
+  padding: 10px;
+  margin-top: -270px; }
+
+.close-box-click {
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  cursor: pointer; }
+
+.upload-title {
+  margin-bottom: 20px; }
+
+.shadow-message .layui-btn {
+  display: block;
+  width: 180px;
+  margin: 0 auto;
+  background-color: #0085d0; }
+
+.shadow-message .layui-upload-img {
+  width: 300px;
+  height: 300px;
+  margin-top: 20px; }
+
+.upload-text {
+  width: 300px;
+  font-size: 12px;
+  color: #666;
+  margin: 10px auto;
+  text-align: left; }
+
+.shadow-message .save-img {
+  display: block;
+  width: 180px;
+  margin: 20px auto;
+  border: 1px solid #0085d0;
+  color: #0085d0;
+  padding: 8px 0;
+  border-radius: 3px;
+  font-size: 14px;
+  cursor: pointer; }
+
+.edit-phone {
+  cursor: pointer; }
+
+.layui-layer.layui-layer-page.my-change-phone {
+  width: 440px !important;
+  height: auto !important; }
+
+.layui-layer.layui-layer-page.my-change-phone .layui-layer-content {
+  padding: 30px 20px 10px 20px; }
+
+.my-change-phone .layui-layer-btn .layui-layer-btn0 {
+  display: block;
+  height: 50px;
+  width: 100%;
+  text-align: center;
+  line-height: 50px;
+  font-size: 18px;
+  background-color: #0085d0;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 1px solid #0085d0;
+  margin-bottom: 20px; }
+
+.step-content {
+  padding: 36px 133px; }
+  .step-content .step-item {
+    display: inline-block;
+    text-align: center; }
+    .step-content .step-item .step-first {
+      width: 41px;
+      height: 40px;
+      background-image: url(http://ks.wangxiao.cn/static/assets/sprites.png);
+      background-repeat: no-repeat;
+      background-position: -658px -345px;
+      vertical-align: middle;
+      display: inline-block; }
+    .step-content .step-item .step-first-active {
+      width: 41px;
+      height: 40px;
+      background-image: url(http://ks.wangxiao.cn/static/assets/sprites.png);
+      background-repeat: no-repeat;
+      background-position: -658px -345px;
+      vertical-align: middle;
+      display: inline-block; }
+    .step-content .step-item .step-second {
+      width: 41px;
+      height: 40px;
+      background-image: url(http://ks.wangxiao.cn/static/assets/sprites.png);
+      background-repeat: no-repeat;
+      background-position: -658px -345px;
+      vertical-align: middle;
+      display: inline-block; }
+    .step-content .step-item .step-second-active {
+      width: 41px;
+      height: 40px;
+      background-image: url(http://ks.wangxiao.cn/static/assets/sprites.png);
+      background-repeat: no-repeat;
+      background-position: -658px -345px;
+      vertical-align: middle;
+      display: inline-block; }
+  .step-content .step-line {
+    display: inline-block;
+    margin: 0 20px;
+    height: 2px;
+    background: #E5E5E5;
+    width: 200px;
+    vertical-align: middle; }
+
+.reset-tip {
+  margin-left: 132px;
+  color: #333; }
+
+.step-input {
+  padding-left: 132px; }
+  .step-input input {
+    width: 200px; }
+
+.step-second-content {
+  display: none; }

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<body>
+<!--头部------开始-->
+<div class="header-box ">
+	<div class="center-box clearfix">
+		<div class="fl header-fl" th:if="${null != agentinfo}">
+			<a href="/"> <img th:src="${agentinfo.logo}" /><span class="logo-text" th:text="${agentinfo.webName}"></span></a>
+		</div>
+		<!--未登录-->
+		<div th:if="${student} == null" class="rt header-rt common-color">
+			<span id="user_register" >登录</span> <i class="header-line">|</i> <span>
+				<a class="common-color" href="/login/goRegistryPage" target="_blank">注册</a>
+			</span>
+		</div>
+		<div th:if="${student} != null" class="rt header-rt common-color">
+            <span class="user-name" id="user-name">
+                <a href="/myCenter/personal/personalCener">
+                    <i id="userName" th:text="${student.userName}">
+                    </i>
+				</a>
+				<a class="logout-box" href="javascript:void(0);" onclick="logout();">退出</a>
+            </span>
+        </div>
+	</div>
+</div>
+<!--头部------结束-->
+<form id="courseForm" method="post" action="/index/courseQueryList">
+<!--导航------开始-->
+<div class="nav-box ">
+	<div class="nav_scope center-box clearFix">
+		<ul class="nav_right clearFix">
+			<li th:class="(${navCode==1}?'nav_active':'')"><a href="/">首页</a></li>
+			<li th:class="(${navCode==2}?'nav_active':'')"><a href="/index/courseQueryList">课程商品</a></li>
+			<li th:class="(${navCode==3}?'nav_active':'')"><a href="/myCenter/product/findStuProductsList">学习中心</a></li>
+			<li th:class="(${navCode==4}?'nav_active':'')"><a href="/myCenter/personal/personalCener">个人中心</a></li>
+		</ul>
+		<div class="rt search-box">
+
+			<th:block th:if="${params != null}">
+				<input type="text" id="search-text" placeholder="请输入课程名称" name="searchName" th:value="${params.searchName}"/>
+			</th:block>
+			<th:block th:if="${params == null}">
+				<input type="text" id="search-text" placeholder="请输入课程名称" name="searchName" />
+			</th:block>
+			<i class="bg-ico serch-ico" onclick="queryCourseList('searchName',this);"
+				id="search-jump"></i>
+		</div>
+	</div>
+</div>
+<!--</form>-->
+</body>
+<script>
+    /**
+     * 课程查询
+     * type searchName搜索    sort 排序                                    type商品类型
+     * value  课程名称           1 默认排序  2价格降序  3价格升序 4 人气降序 5 人气升序      1全部 2 直播   3 录播
+     * search-text
+     */
+    function queryCourseList(type,value){
+        if(type=='searchName'){
+            var courseName = $(value).prev()[0].value;
+            if(courseName !=""){
+                $("#search-text").val(courseName);
+            }
+        }else if(type =='sort'){
+            $("#sort").val(value);
+
+        }else if(type =='type'){
+            $("#typeTag").val(value);
+        }
+        $("#oneClass").val("");
+        $("#twoClass").val("");
+        $("#courseForm").submit();
+    }
+</script>

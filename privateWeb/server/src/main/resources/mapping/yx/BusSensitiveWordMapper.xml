@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.yx.BusSensitiveWordMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.yx.BusSensitiveWord">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
+    <result column="create_id" jdbcType="CHAR" property="createId" />
+    <result column="create_name" jdbcType="VARCHAR" property="createName" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+      <result column="lastoperation_time" jdbcType="TIMESTAMP" property="lastoperationTime" />
+  </resultMap>
+  
+  <select id ="selectSensitiveWord" parameterType="com.zhongda.yunxiao.server.entity.request.QuerySensitiveWordIn" resultType="com.zhongda.yunxiao.server.entity.response.QuerySensitiveWordOut">
+     select id,name,status,create_time createTime
+     from bus_sensitive_word
+     where is_delete=0
+       <if test="name!=null and name!=''">
+          and name=#{name}
+       </if>
+     order by create_time desc
+  </select>
+  
+  <insert id="insertList" >
+     insert into bus_sensitive_word (id,name,status,is_delete,create_id,create_name,create_time) values
+      <foreach collection="dataList" item="data" index="i" separator=",">
+       (#{data.id},#{data.name},#{data.status},#{data.isDelete},
+       #{data.createId},#{data.createName},#{data.createTime})
+      </foreach>
+  
+  </insert>
+  <update id="updateStatusByIds">
+      update bus_sensitive_word set status=#{status}
+      where id in
+      <foreach collection="ids" open="(" close=")" separator="," item="id">
+  			#{id}
+  	 </foreach>
+  </update>
+
+    <update id="updateByConditions">
+       update bus_sensitive_word set name=#{word.name} where id=#{word.id} and is_delete=0
+    </update>
+
+    <select id="selectByWordId" resultMap="BaseResultMap">
+      select id,name,status from bus_sensitive_word where id=#{id} and is_delete=0
+    </select>
+</mapper>

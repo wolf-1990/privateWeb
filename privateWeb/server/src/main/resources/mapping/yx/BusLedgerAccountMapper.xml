@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.yx.BusLedgerAccountMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.yx.BusLedgerAccount">
+    <id column="id" jdbcType="NCHAR" property="id" />
+    <result column="agent_id" jdbcType="INTEGER" property="agentId" />
+    <result column="agentname" jdbcType="NVARCHAR" property="agentname" />
+    <result column="creation_time" jdbcType="TIMESTAMP" property="creationTime" />
+    <result column="total_price" jdbcType="DECIMAL" property="totalPrice" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="account_price" jdbcType="DECIMAL" property="accountPrice" />
+    <result column="web_name" jdbcType="NVARCHAR" property="webName" />
+    <result column="account_level" jdbcType="DECIMAL" property="accountLevel" />
+    <result column="settlemen" jdbcType="NVARCHAR" property="settlemen" />
+  </resultMap>
+
+  <select id="querySubAccountList" resultType="com.zhongda.yunxiao.server.entity.response.SubAccountResponse">
+    select la.id,la.agent_id,la.web_name,la.agentname agentName,la.creation_time,la.account_level,la.total_price,la.account_price,la.status,la.settlemen
+    from bus_ledger_account la
+    where 1=1
+      <if test="param.agentName!=null and param.agentName!=''">
+        and la.agentname=#{param.agentName}
+      </if>
+      <if test="param.startTime!=null">
+        and la.creation_time &gt; #{param.startTime}
+      </if>
+      <if test="param.endTime!=null">
+        and la.creation_time &lt; #{param.endTime}
+      </if>
+      <if test="param.status!=null">
+        and la.status=#{param.status}
+      </if>
+    order by la.creation_time desc,la.status asc
+  </select>
+
+  <insert id="batchInsertRecordsTask">
+    insert into bus_ledger_account
+    values (agent_id,agentname,creation_time,total_price,status,account_price,web_name,account_level)
+    <foreach collection="param" item="item" separator=",">
+      (#{item.agentId},#{item.agentname},#{item.creationTime},#{item.totalPrice},#{item.status},#{item.accountPrice},#{item.webName},#{item.accountLevel})
+    </foreach>
+  </insert>
+
+  <update id="updateRecord">
+    update bus_ledger_account set total_price=total_price+#{totalPrice},account_price=account_price+#{accountPrice} where agent_id=#{agent.id} and agentname=#{agent.agentName}
+  </update>
+
+  <select id="querySubAccount" resultMap="BaseResultMap">
+    select top 1 * from bus_ledger_account where agent_id=#{param.agentId} order by creation_time desc
+  </select>
+
+  <update id="updateAccountLevel">
+    update bus_ledger_account set account_level=#{param.accountLevel} where id=#{param.id} and agent_id=#{param.agentId}
+  </update>
+
+  <update id="affirmAccount">
+    update bus_ledger_account set status=1 where id=#{id} and status=0
+  </update>
+</mapper>

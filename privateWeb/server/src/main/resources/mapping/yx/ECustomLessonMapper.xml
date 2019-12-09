@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.yx.ECustomLessonMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.yx.ECustomLesson">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="lesson_id" jdbcType="VARCHAR" property="lessonId" />
+    <result column="course_id" jdbcType="VARCHAR" property="courseId" />
+    <result column="lesson_name" jdbcType="VARCHAR" property="lessonName" />
+    <result column="section_year" jdbcType="INTEGER" property="sectionYear" />
+    <result column="seq" jdbcType="INTEGER" property="seq" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="time_long" jdbcType="VARCHAR" property="timeLong" />
+    <result column="pub_source" jdbcType="INTEGER" property="pubSource" />
+    <result column="teacher_id" jdbcType="VARCHAR" property="teacherId" />
+    <result column="teacher_name" jdbcType="VARCHAR" property="teacherName" />
+    <result column="cc_room" jdbcType="VARCHAR" property="ccRoom" />
+    <result column="play_back_url" jdbcType="VARCHAR" property="playBackUrl" />
+    <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="creator_id" jdbcType="VARCHAR" property="creatorId" />
+    <result column="creator_name" jdbcType="VARCHAR" property="creatorName" />
+    <result column="creation_time" jdbcType="TIMESTAMP" property="creationTime" />
+    <result column="lastoperator_id" jdbcType="VARCHAR" property="lastoperatorId" />
+    <result column="lastoperator_name" jdbcType="VARCHAR" property="lastoperatorName" />
+    <result column="lastoperation_time" jdbcType="TIMESTAMP" property="lastoperationTime" />
+    <result column="agent_id" jdbcType="INTEGER" property="agentId" />
+    <result column="agentname" jdbcType="VARCHAR" property="agentname" />
+    <result column="lesson_type" jdbcType="INTEGER" property="lessonType" />
+    <result column="handout_url" jdbcType="VARCHAR" property="handoutUrl" />
+    <result column="is_upload" jdbcType="INTEGER" property="isUpload" />
+    <result column="live_id" jdbcType="VARCHAR" property="liveId" />
+    <result column="total_seconds" jdbcType="INTEGER" property="totalSeconds" />
+    <result column="product_id" jdbcType="VARCHAR" property="productId" />
+    <result column="record_id" jdbcType="VARCHAR" property="recordId" />
+    <result column="record_video_id" jdbcType="VARCHAR" property="recordVideoId" />
+    <result column="e_course_id" jdbcType="VARCHAR" property="eCourseId" />
+    <result column="ccvid" jdbcType="VARCHAR" property="ccvid" />
+  </resultMap>
+  <select id="selectOverEndTimeLessons" resultMap="BaseResultMap">
+  	SELECT e.id,e.cc_room FROM e_custom_lesson e WHERE e.end_time &lt; GETDATE() AND e.status = 0
+  </select>
+
+  <select id="selectByProductIdAndCourseId" resultMap="BaseResultMap" parameterType="com.zhongda.yunxiao.server.entity.yx.ECustomLesson">
+    SELECT id,lesson_id,course_id,lesson_name,section_year,
+    seq,start_time,end_time,time_long,pub_source,teacher_id,
+    teacher_name,cc_room,play_back_url,is_delete,status,creator_id,
+    creator_name,creation_time,lastoperator_id,lastoperator_name,lastoperation_time,
+    agent_id,agentname,lessonType,handoutUrl,isUpload,live_id,total_seconds,product_id,
+    record_id,record_video_id,e_course_id
+    FROM e_custom_lesson  WHERE  course_id = #{courseId}  AND product_id = #{productId}
+
+  </select>
+
+  <select id="selectCountByCourseId" resultType="java.lang.Integer" parameterType="java.lang.String">
+    select count(1) from e_custom_lesson WHERE  course_id = #{courseId} and is_delete = 0
+  </select>
+  <select id="selectCustomerLessonCountByProductId" resultType="java.lang.Integer" parameterType="java.lang.String">
+    SELECT COUNT(DISTINCT(l.id)) 
+    FROM e_custom_lesson l LEFT JOIN e_customer_course c ON l.course_id = c.course_id 
+    WHERE c.product_id = #{productId} and l.is_delete = 0
+  </select>
+  <select id="selectCustomerCourseLessonCount" resultType="java.lang.Integer">
+    SELECT COUNT(1) 
+    FROM e_custom_lesson l 
+	where l.course_id = #{courseId} and l.section_year = #{sectionyear}  and l.is_delete = 0
+  </select>
+  <select id="findBeginTimeByCourseId" parameterType="java.lang.String" resultType="java.util.Date">
+    select top 1 start_time from e_custom_lesson where course_id = #{courseId} order by start_time desc
+  </select>
+  <select id="selectSelfLiveProducts" resultType="com.zhongda.yunxiao.server.entity.response.ProductLive">
+    SELECT b.start_time beginTime,c.product_id productsId
+		FROM (
+			SELECT ecl.course_id,MIN(ecl.end_time) end_time FROM e_custom_lesson ecl WHERE ecl.end_time > GETDATE() GROUP BY ecl.course_id
+		) as a 
+		LEFT JOIN e_custom_lesson b on a.course_id = b.course_id and a.end_time = b.end_time
+		RIGHT JOIN e_customer_course c ON c.course_id = b.course_id
+		WHERE b.course_id > ''
+  </select>
+  
+
+</mapper>

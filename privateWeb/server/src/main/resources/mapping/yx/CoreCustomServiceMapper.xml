@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.yx.CoreCustomServiceMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.yx.CoreCustomService">
+    <id column="id" jdbcType="NCHAR" property="id" />
+    <result column="name" jdbcType="NVARCHAR" property="name" />
+    <result column="phone" jdbcType="NVARCHAR" property="phone" />
+    <result column="qq" jdbcType="NVARCHAR" property="qq" />
+    <result column="wechat" jdbcType="NVARCHAR" property="wechat" />
+    <result column="service_date" jdbcType="NVARCHAR" property="serviceDate" />
+    <result column="creation_time" jdbcType="TIMESTAMP" property="creationTime" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+  </resultMap>
+  <select id="getAllCustomService" resultMap="BaseResultMap">
+    select top 1
+    id ,name ,phone , qq , wechat ,service_date ,creation_time ,is_delete
+    from core_custom_service
+    order by creation_time desc
+  </select>
+</mapper>

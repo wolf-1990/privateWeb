@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.yx.StudentMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.yx.Student">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
+    <result column="agent_id" jdbcType="INTEGER" property="agentId" />
+    <result column="agent_name" jdbcType="VARCHAR" property="agentName" />
+    <result column="source" jdbcType="TINYINT" property="source" />
+    <result column="course_num" jdbcType="INTEGER" property="courseNum" />
+    <result column="course_names" jdbcType="VARCHAR" property="courseNames" />
+    <result column="gender" jdbcType="TINYINT" property="gender" />
+  </resultMap>
+
+  <select id="queryStuManageList" resultType="com.zhongda.yunxiao.server.entity.response.StuManageOut">
+    select s.id,s.user_name,s.course_names,s.phone,s.source
+    from student s
+    left join stu_course sc on s.id=sc.stu_id
+    where s.is_delete=0 and s.agent_id=#{agentId}
+    <if test="null != param.condition and param.condition != ''">
+      and (s.user_name like '%'+#{param.condition}+'%' or s.real_name like '%'+#{param.condition}+'%' or s.phone like '%'+#{param.condition}+'%')
+    </if>
+    <if test="null != param.source and param.source != ''">
+      and s.source = #{param.source}
+    </if>
+    GROUP BY s.id,s.user_name,s.course_names,s.phone,s.source
+    <!--SELECT-->
+    <!--id,user_name,real_name,phone,source,-->
+    <!--[courseNames] = stuff((SELECT ',' + sc.course_name FROM stu_course sc WHERE student.id=sc.stu_id FOR xml path('')),-->
+    <!--1,-->
+    <!--1,-->
+    <!--''-->
+    <!--) from  student-->
+    <!--where is_delete=0-->
+    <!--<if test="null != param.condition and param.condition != ''">-->
+      <!--and CONCAT(user_name,real_name,phone) like CONCAT('%',#{param.condition},'%')-->
+    <!--</if>-->
+    <!--<if test="null != param.source and param.source != ''">-->
+      <!--and source = #{param.source}-->
+    <!--</if>-->
+    <!--GROUP BY-->
+    <!--id,user_name,real_name,phone,source-->
+  </select>
+
+  <select id="selectByUserName" resultMap="BaseResultMap">
+    select * from student where is_delete=0 and user_name=#{userName}
+  </select>
+
+  <update id="removeUser">
+    update student
+    set is_delete=1
+    where id=#{id}
+  </update>
+
+  <select id="selectByPhone" resultMap="BaseResultMap">
+    select * from student where is_delete=0 and phone=#{phone}
+  </select>
+
+  <select id="queryStuUserNameById" resultType="java.lang.String">
+    select user_name
+    from student where id=#{stuId}
+  </select>
+
+  <select id="selectDetailByUserName" resultMap="BaseResultMap">
+    select * from student where is_delete=0 and user_name=#{username}
+  </select>
+
+  <update id="updateTitlesById">
+    update student
+    set course_names=#{title} where id=#{id}
+  </update>
+
+  <update id="updateCourseNumById">
+    update student set course_num=#{courseNum} where id=#{id} and is_delete=0
+  </update>
+
+  <select id="queryStuById" resultMap="BaseResultMap">
+    select * from student where id=#{id} and is_delete=0
+  </select>
+
+  <update id="updateStuInfoById">
+    update student
+    <set>
+      <if test="stu.nickName!=null and stu.nickName!=''">
+        nick_name=#{stu.nickName},
+      </if>
+      <if test="stu.gender!=null">
+        gender=#{stu.gender},
+      </if>
+    </set>
+    where id=#{stu.id}
+  </update>
+
+  <update id="updatePhoneById">
+    update student set phone=#{phone} where id=#{id} and is_delete=0
+  </update>
+
+  <!-- selectLoginUserByUserName 获取登录用户 通过用户名 或者手机号 -->
+  <select id="selectLoginUserByUserName" parameterType="com.zhongda.yunxiao.server.entity.request.UserLoginRequest" resultMap="BaseResultMap">
+    SELECT
+      top 1
+      st.id, st.user_name, st.nick_name, st.real_name, st.phone, st.password, st.is_delete,
+      st.agent_id, st.agentname, st.source, st.course_num, st.course_names, st.gender
+    FROM student st where 1=1
+    <if test="loginType!=null and loginType==1">
+      and st.phone = #{phone}
+    </if>
+    <if test="loginType!=null and loginType==0">
+      and (st.phone = #{userName} or st.user_name = #{userName})
+    </if>
+
+  </select>
+</mapper>

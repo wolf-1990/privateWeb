@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body th:if="${null != agentinfo}">
+	<div class="footer">
+		<div class="footer-box">
+			<div class="center-box clearfix">
+				<div class="fl footer-fl">
+					<div class="about-message">
+						<span th:text="'地址：' + ${agentinfo.address}"></span> 
+						<span th:text="'电话：' + ${agentinfo.mobile}"></span> 
+						<span th:text="'官网网址：' + ${agentinfo.webUrl}"></span>
+						<span th:text="'E-mail：' + ${agentinfo.email}"></span>
+					</div>
+					<div class="about-message">
+						<span th:text="'版权所有：' + ${agentinfo.companyName}"></span>
+					</div>
+				</div>
+				<div class="rt footer-rt clearfix">
+					<div class="fl footer-img ">
+						<!-- <script type="text/javascript">document.write(unescape("%3Cspan id='_ideConac' %3E%3C/span%3E%3Cscript   src='http://dcs.conac.cn/js/01/000/0000/60649465/CA010000000606494650002.js' type='text/javascript'%3E%3C/script%3E"));</script> -->
+					</div>
+					<!-- <div class="rt footer-img ">
+						<img
+							src="http://www.bjou.edu.cn/images/17/01/05/1fwlde9g09/20170105173420.jpg" />
+					</div> -->
+				</div>
+			</div>
+		</div>
+		<div class="footer-bottom tc">京公网安备 11010802023446号</div>
+	</div>
+	<!--左侧浮动-->
+	<div class="floating_window">
+		<div class="consult-wrap">
+			<div class="consult-item">
+				<img src="../../assets/qq.png" alt="">
+				<div>
+					QQ <br />咨询
+				</div>
+				<div class="ercode-big">
+					<p class="ercode-text" th:text="${agentinfo.qq}"></p>
+				</div>
+			</div>
+			<div class="consult-item">
+				<img src="../../assets/wx.png" alt="">
+				<div>
+					微信 <br />咨询
+				</div>
+				<div class="ercode-big">
+					<img th:src="${agentinfo.wechatCode}">
+				</div>
+			</div>
+		</div>
+		<div class="fix-box-list fix-box-er phone-box">
+			<img src="../../assets/phone.png" alt="">
+			<div class="ercode-big">
+				<p class="ercode-text" th:text="${agentinfo.mobile}"></p>
+			</div>
+		</div>
+	</div>
+</body>

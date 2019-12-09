@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.products.LiveVideoInfoMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.products.LiveVideoInfo">
+    <id column="LiveActivityId" jdbcType="CHAR" property="liveactivityid" />
+    <result column="Activityid" jdbcType="VARCHAR" property="activityid" />
+    <result column="activityName" jdbcType="NVARCHAR" property="activityname" />
+    <result column="activityStatus" jdbcType="TINYINT" property="activitystatus" />
+    <result column="Machine" jdbcType="VARCHAR" property="machine" />
+    <result column="PushUrl" jdbcType="VARCHAR" property="pushurl" />
+    <result column="Status" jdbcType="VARCHAR" property="status" />
+    <result column="StreamId" jdbcType="VARCHAR" property="streamid" />
+    <result column="VideoId" jdbcType="VARCHAR" property="videoid" />
+    <result column="VideoUnique" jdbcType="VARCHAR" property="videounique" />
+    <result column="playPageUrl" jdbcType="VARCHAR" property="playpageurl" />
+    <result column="CreateTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="LastUpdateTime" jdbcType="TIMESTAMP" property="lastupdatetime" />
+    <result column="VideoLength" jdbcType="INTEGER" property="videolength" />
+    <result column="VideoSourse" jdbcType="TINYINT" property="videosourse" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zhongda.yunxiao.server.entity.products.LiveVideoInfo">
+    <result column="AliyunLivePlayBackUrl" jdbcType="VARBINARY" property="aliyunliveplaybackurl" />
+  </resultMap>
+</mapper>

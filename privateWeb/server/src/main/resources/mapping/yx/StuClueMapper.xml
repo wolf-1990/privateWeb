@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.yx.StuClueMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.yx.StuClue">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="course_id" jdbcType="VARCHAR" property="courseId" />
+    <result column="course_name" jdbcType="VARCHAR" property="courseName" />
+    <result column="stu_id" jdbcType="VARCHAR" property="stuId" />
+    <result column="stu_user_name" jdbcType="VARCHAR" property="stuUserName" />
+    <result column="source" jdbcType="TINYINT" property="source" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="talk_num" jdbcType="TINYINT" property="talkNum" />
+    <result column="creation_time" jdbcType="TIMESTAMP" property="creationTime" />
+    <result column="lastoperator_name" jdbcType="VARCHAR" property="lastoperatorName" />
+    <result column="lastoperation_time" jdbcType="TIMESTAMP" property="lastoperationTime" />
+    <result column="agent_id" jdbcType="INTEGER" property="agentId" />
+    <result column="agentname" jdbcType="VARCHAR" property="agentname" />
+    <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
+  </resultMap>
+  
+    <select id="queryList" parameterType="com.zhongda.yunxiao.server.entity.request.QueryStuClueListIn" resultType="com.zhongda.yunxiao.server.entity.response.QueryStuClueOut">
+     select c.id,c.stu_user_name stuUserName,s.real_name stuRealName,s.phone ,c.course_id courseId,
+     c.course_name courseName,c.source,c.status,c.creation_time creationTime,count(t.id) as talkNum
+     from stu_clue c
+     inner join student s on c.stu_id = s.id and s.is_delete=0
+     left join stu_talk_record t on t.clue_id=c.id and t.is_delete=0
+     where c.agent_id=#{agentId} and c.is_delete=0
+     <if test="message!=null and message!=''">
+         and (s.user_name like '%'+#{message}+'%' or s.real_name like '%'+#{message}+'%' or s.phone like '%'+#{message}+'%')
+     </if> 
+     <if test="source!=null">
+         and c.source=#{source}
+     </if>
+     <if test="status!=null">
+         and c.status=#{status}
+     </if>
+     group by c.id,c.stu_user_name,s.real_name,s.phone ,c.course_id,c.course_name,c.source,c.status,c.creation_time
+     order by c.creation_time desc
+  </select>
+
+    <select id="selectStuClueList" resultMap="BaseResultMap">
+      select *
+      from stu_clue
+      where stu_id=#{stuId} and course_id=#{courseId} and is_delete=0
+    </select>
+    <select id="selectAgentClueNum" resultType="java.lang.Integer" parameterType="com.zhongda.yunxiao.server.entity.request.AgentAccountIn">
+      SELECT COUNT(1) FROM stu_clue WHERE agentname=#{param.agentname}
+      <if test="null != param.startDate">
+		AND creation_time &gt; #{param.startDate}
+	  </if>
+	  <if test="null != param.endDate">
+		AND creation_time &lt; #{param.endDate}
+	  </if>
+    </select>
+
+    <select id="queryClueByCourse" resultMap="BaseResultMap">
+        select * from stu_clue WHERE course_id=#{courseId} and stu_id=#{userId} and agent_id=#{agentInfo.id} and source=#{source}
+    </select>
+    
+</mapper>

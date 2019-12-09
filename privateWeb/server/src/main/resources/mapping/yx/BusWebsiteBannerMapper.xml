@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.yx.BusWebsiteBannerMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.yx.BusWebsiteBanner">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="sort" jdbcType="TINYINT" property="sort" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
+    <result column="bg_color" jdbcType="VARCHAR" property="bgColor" />
+    <result column="redirect_url" jdbcType="VARCHAR" property="redirectUrl" />
+    <result column="creator_id" jdbcType="CHAR" property="creatorId" />
+    <result column="creator_name" jdbcType="VARCHAR" property="creatorName" />
+    <result column="creation_time" jdbcType="TIMESTAMP" property="creationTime" />
+    <result column="lastoperator_id" jdbcType="CHAR" property="lastoperatorId" />
+    <result column="lastoperator_name" jdbcType="VARCHAR" property="lastoperatorName" />
+    <result column="lastoperation_time" jdbcType="TIMESTAMP" property="lastoperationTime" />
+    <result column="agent_id" jdbcType="INTEGER" property="agentId" />
+    <result column="agentname" jdbcType="VARCHAR" property="agentname" />
+    <result column="check_status" jdbcType="TINYINT" property="checkStatus" />
+    <result column="check_id" jdbcType="CHAR" property="checkId" />
+    <result column="check_time" jdbcType="TIMESTAMP" property="checkTime" />
+    <result column="check_description" jdbcType="VARCHAR" property="checkDescription" />
+    <result column="position" jdbcType="TINYINT" property="position" />
+      <result column="wap_redirect_url" jdbcType="VARCHAR" property="wapRedirectUrl" />
+      <result column="submit_time" jdbcType="TIMESTAMP" property="submitTime" />
+      <result column="banner_color" jdbcType="VARCHAR" property="bannerColor" />
+  </resultMap>
+  
+   
+  <select id="queryList" parameterType="com.zhongda.yunxiao.server.entity.request.QueryBannerListIn" resultType="com.zhongda.yunxiao.server.entity.response.QueryBannerOut">
+    select 
+    b.id ,b.title,b.type,b.position,b.sort,r.url img, b.creator_name userName, b.creation_time creationTime,b.status ,b.check_status checkStatus,b.check_description checkDescription,b.banner_color bannerColor
+    from bus_website_banner b
+    left join core_resource r on b.id=r.biz_id and r.big_type=1 and r.small_type=2 and r.is_delete=0
+    where
+       b.is_delete=0
+       <if test="type!=null">
+        and b.type=#{type}
+       </if>
+       <if test="position!=null">
+        and b.position=#{position}
+       </if>
+       <if test="title!=null and title!=''">
+        and b.title like '%'+#{title}+'%'
+       </if>
+       <if test="agentId!=null">
+        and b.agent_id=#{agentId}
+       </if>
+    
+    order by b.creation_time desc
+    
+  </select>
+  
+  <select id="validateIds" resultType="java.lang.String">
+     select id from bus_website_banner where check_status=1 and is_delete=0 and status!=1 and id in
+     <foreach collection="ids" open="(" close=")" separator="," item="id">
+  			#{id}
+  	 </foreach>
+  </select>
+  
+  <update id="updateCheckStatus">
+     update bus_website_banner set check_status=#{status} ,submit_time=GETDATE() where id in
+     <foreach collection="ids" open="(" close=")" separator="," item="id">
+  			#{id}
+   	 </foreach>
+  </update>
+  
+  <select id="queryCheckList" resultType="com.zhongda.yunxiao.server.entity.response.QueryCheckBannerOut">
+      select b.id,b.title,b.position,b.type,b.check_time checkTime,b.submit_time,b.check_status checkStatus,b.redirect_url redirectUrl,b.wap_redirect_url wapRedirectUrl,
+      r1.url pcImgUrl,r2.url phoneImgUrl
+      from bus_website_banner b
+      left join core_resource r1 on b.id=r1.biz_id and r1.big_type=1 and r1.small_type=2 and r1.is_delete=0
+      left join core_resource r2 on b.id=r2.biz_id and r2.big_type=1 and r2.small_type=4 and r2.is_delete=0
+      where b.is_delete=0 and b.agent_id=#{agentId}
+      order by b.check_time asc
+  </select>
+  
+  <select id="queryCheckAgentCount" resultType="java.util.Map">
+      select agent_id agentId,count(id) count
+      from bus_website_banner
+      where is_delete=0 and check_status = 2 and agent_id in 
+      <foreach collection="agentIds" open="(" close=")" separator="," item="agentId">
+         #{agentId}
+      </foreach>
+      group by agent_id
+  </select>
+  
+  <update id="updateBannerByConditions">
+      update bus_website_banner
+      set title=#{banner.title},type=#{banner.type},status=null,redirect_url=#{banner.redirectUrl},
+      lastoperator_id=#{banner.lastoperatorId},lastoperator_name=#{banner.lastoperatorName},lastoperation_time=#{banner.lastoperationTime},
+      check_status=#{banner.checkStatus},wap_redirect_url=#{banner.wapRedirectUrl},position=#{banner.position},banner_color=#{banner.bannerColor}
+      where id=#{banner.id} and is_delete=0
+  </update>
+
+    <update id="saveOrUpdateBGColor">
+      update bus_website_banner set banner_color=#{color.param} where id=#{color.bannerId} and  agent_id=#{agent.agentId} and agentname=#{agent.agentName} and is_delete=0
+    </update>
+
+    <update id="saveOrUpdateBGSort">
+      update bus_website_banner set sort=#{sort.param} where id=#{sort.bannerId} and agent_id=#{agent.agentId} and agentname=#{agent.agentName} and is_delete=0
+    </update>
+</mapper>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.yx.StuCourseLessonMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.yx.StuCourseLesson">
+    <id column="id" jdbcType="NCHAR" property="id" />
+    <result column="stu_course_id" jdbcType="NCHAR" property="stuCourseId" />
+    <result column="lesson_id" jdbcType="NVARCHAR" property="lessonId" />
+    <result column="course_id" jdbcType="NVARCHAR" property="courseId" />
+    <result column="lesson_name" jdbcType="NVARCHAR" property="lessonName" />
+    <result column="agent_id" jdbcType="INTEGER" property="agentId" />
+    <result column="agentname" jdbcType="NVARCHAR" property="agentname" />
+    <result column="stu_id" jdbcType="NCHAR" property="stuId" />
+    <result column="stu_user_name" jdbcType="NVARCHAR" property="stuUserName" />
+    <result column="current_position" jdbcType="INTEGER" property="currentPosition" />
+    <result column="max_position" jdbcType="INTEGER" property="maxPosition" />
+    <result column="total_seconds" jdbcType="INTEGER" property="totalSeconds" />
+    <result column="study_state" jdbcType="TINYINT" property="studyState" />
+    <result column="product_id" jdbcType="NCHAR" property="productId" />
+    <result column="study_count" jdbcType="INTEGER" property="studyCount" />
+    <result column="last_operation_time" jdbcType="TIMESTAMP" property="lastOperationTime" />
+
+  </resultMap>
+
+  <!-- selectRecords -->
+  <select id="selectRecords" parameterType="com.zhongda.yunxiao.server.entity.yx.StuCourseLesson" resultMap="BaseResultMap">
+      SELECT id, stu_course_id, lesson_id, course_id, lesson_name,
+       agent_id, agentname, stu_id, stu_user_name, current_position,
+       max_position, total_seconds, study_state, product_id, study_count,
+       last_operation_time
+      FROM stu_course_lesson
+      where agent_id = #{agentId} and stu_id = #{stuId}
+      <if test="productId != null">
+          and product_id = #{productId}
+      </if>
+      order by last_operation_time desc
+  </select>
+  
+</mapper>

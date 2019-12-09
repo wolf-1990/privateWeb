@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.products.LiveActivityMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.products.LiveActivity">
+    <id column="ID" jdbcType="CHAR" property="id" />
+    <result column="BeginTime" jdbcType="TIMESTAMP" property="begintime" />
+    <result column="EndTime" jdbcType="TIMESTAMP" property="endtime" />
+    <result column="LiveCourseID" jdbcType="CHAR" property="livecourseid" />
+    <result column="TeacherId" jdbcType="CHAR" property="teacherid" />
+    <result column="TeacherName" jdbcType="NVARCHAR" property="teachername" />
+    <result column="UseStatus" jdbcType="TINYINT" property="usestatus" />
+    <result column="ActivityTitle" jdbcType="NVARCHAR" property="activityTitle" />
+    <result column="Sort" jdbcType="INTEGER" property="sort" />
+    <result column="CreateTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="ActivityCover" jdbcType="VARCHAR" property="activitycover" />
+    <result column="ActivityDescription" jdbcType="NVARCHAR" property="activitydescription" />
+    <result column="HandOut" jdbcType="VARCHAR" property="handout" />
+    <result column="TemplateId" jdbcType="CHAR" property="templateid" />
+    <result column="IsRecord" jdbcType="TINYINT" property="isrecord" />
+    <result column="Status" jdbcType="TINYINT" property="status" />
+    <result column="IsPush" jdbcType="BIT" property="ispush" />
+    <result column="ViewCount" jdbcType="INTEGER" property="viewcount" />
+    <result column="JiangYiHtml" jdbcType="NVARCHAR" property="jiangyihtml" />
+    <result column="ClassHoursType" jdbcType="TINYINT" property="classhourstype" />
+    <result column="SectionYear" jdbcType="INTEGER" property="sectionyear" />
+    <result column="PushProducts" jdbcType="VARCHAR" property="pushproducts" />
+    <result column="SysClassId" jdbcType="CHAR" property="sysclassid" />
+    <result column="AppointmentCount" jdbcType="INTEGER" property="appointmentcount" />
+    <result column="FreeLength" jdbcType="INTEGER" property="freelength" />
+    <result column="sourceId" jdbcType="CHAR" property="sourceid" />
+  </resultMap>
+  <resultMap id="WithRecordResultMap" type="com.zhongda.yunxiao.server.entity.bean.LiveActivityWithRecord" extends="BaseResultMap">
+    <result column="VideoUnique" jdbcType="VARCHAR" property="VideoUnique" />
+    <result column="VideoSourse" jdbcType="VARCHAR" property="VideoSourse" />
+  </resultMap>
+  <select id="selectInfoWithRecord" parameterType="com.zhongda.yunxiao.server.entity.products.LiveActivity" resultMap="WithRecordResultMap" >
+  	select la.ID, la.BeginTime, la.EndTime, la.LiveCourseId, la.Sort, lv.VideoUnique, lv.VideoSourse, la.ActivityTitle, la.Sort
+  	from LiveActivity la left join LiveVideoInfo lv on la.ID = lv.LiveActivityId
+  	where la.LiveCourseId = #{param.livecourseid} and la.SectionYear = #{param.sectionyear}
+  	order by la.Sort
+  </select>
+  
+  
+</mapper>

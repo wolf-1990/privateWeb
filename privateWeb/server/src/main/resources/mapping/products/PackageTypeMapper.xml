@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.product.PackageTypeMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.products.PackageType">
+    <id column="Id" jdbcType="INTEGER" property="id" />
+    <result column="Name" jdbcType="NVARCHAR" property="name" />
+    <result column="OldId" jdbcType="INTEGER" property="oldid" />
+    <result column="Sort" jdbcType="INTEGER" property="sort" />
+    <result column="Status" jdbcType="TINYINT" property="status" />
+    <result column="Level" jdbcType="INTEGER" property="level" />
+    <result column="msrepl_tran_version" jdbcType="CHAR" property="msreplTranVersion" />
+    <result column="appearWechat" jdbcType="INTEGER" property="appearwechat" />
+    <result column="appearReturnVisit" jdbcType="INTEGER" property="appearreturnvisit" />
+  </resultMap>
+</mapper>

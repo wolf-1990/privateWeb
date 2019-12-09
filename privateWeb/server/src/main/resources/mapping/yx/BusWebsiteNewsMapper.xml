@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.yx.BusWebsiteNewsMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.yx.BusWebsiteNews">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="sort" jdbcType="TINYINT" property="sort" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
+    <result column="creator_id" jdbcType="CHAR" property="creatorId" />
+    <result column="creator_name" jdbcType="VARCHAR" property="creatorName" />
+    <result column="creation_time" jdbcType="TIMESTAMP" property="creationTime" />
+    <result column="lastoperator_id" jdbcType="CHAR" property="lastoperatorId" />
+    <result column="lastoperator_name" jdbcType="VARCHAR" property="lastoperatorName" />
+    <result column="lastoperation_time" jdbcType="TIMESTAMP" property="lastoperationTime" />
+    <result column="agent_id" jdbcType="INTEGER" property="agentId" />
+    <result column="agentname" jdbcType="VARCHAR" property="agentname" />
+    <result column="check_status" jdbcType="TINYINT" property="checkStatus" />
+    <result column="check_id" jdbcType="CHAR" property="checkId" />
+    <result column="check_time" jdbcType="TIMESTAMP" property="checkTime" />
+    <result column="check_description" jdbcType="VARCHAR" property="checkDescription" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+      <result column="submit_time" jdbcType="TIMESTAMP" property="submitTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zhongda.yunxiao.server.entity.yx.BusWebsiteNews">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  
+  <select id="queryList" resultType="com.zhongda.yunxiao.server.entity.response.QueryNewsOut" parameterType="com.zhongda.yunxiao.server.entity.request.QueryNewsIn">
+    select id,title,type,creator_name creatorName,status,check_status checkStatus,check_description checkDescription,creation_time creationTime
+    from bus_website_news 
+    where is_delete=0
+        <if test="agentId!=null">
+          and agent_id=#{agentId}
+        </if>
+        <if test="type!=null">
+	       and type=#{type}
+	    </if>
+	    <if test="title!=null and title!=''">
+	       and title like '%'+#{title}+'%'
+	    </if>
+    
+    order by creation_time desc
+  </select>
+  
+  
+  <select id="selectCheckList" resultType="com.zhongda.yunxiao.server.entity.response.QueryCheckNewsOut">
+      select id,title,content,check_time checkTime,submit_time,check_status checkStatus
+      from bus_website_news
+      where
+        is_delete=0
+        <if test="agentId!=null">
+           and agent_id=#{agentId}
+        </if>
+      order by check_time asc
+  </select>
+  
+  <select id="selectRecentNewsList" parameterType="com.zhongda.yunxiao.server.entity.yx.BusWebsiteNews" resultType="com.zhongda.yunxiao.server.entity.response.QueryNewsListOut">
+      select top 10 id,title
+      from bus_website_news
+      where agent_id=#{agentId} and id!=#{id} and is_delete=0 and status=1
+      order by creation_time desc
+     
+  </select>
+  
+   <select id="queryCheckAgentCount" resultType="java.util.Map">
+      select agent_id agentId,count(id) count
+      from bus_website_news
+      where is_delete=0 and check_status = 2 and agent_id in 
+      <foreach collection="agentIds" open="(" close=")" separator="," item="agentId">
+         #{agentId}
+      </foreach>
+      group by agent_id
+  
+  </select>
+   <select id="selectRecommendList" resultMap="BaseResultMap">
+      select top 4 id,title,creation_time
+      from bus_website_news
+      where is_delete=0 and status=1
+      <if test=" param.agentId!=null ">
+		and agent_id=#{param.agentId}
+      </if>
+      <if test=" param.checkStatus!=null ">
+		and check_status=#{param.checkStatus}
+      </if>
+      order by creation_time desc
+  
+  </select>
+  
+</mapper>

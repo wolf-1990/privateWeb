@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.yx.BusOrderMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.yx.BusOrder">
+    <id column="id" jdbcType="NCHAR" property="id" />
+    <result column="order_no" jdbcType="NVARCHAR" property="orderNo" />
+    <result column="stu_id" jdbcType="NVARCHAR" property="stuId" />
+    <result column="total_price" jdbcType="DECIMAL" property="totalPrice" />
+    <result column="real_price" jdbcType="DECIMAL" property="realPrice" />
+    <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+    <result column="remark" jdbcType="NVARCHAR" property="remark" />
+    <result column="agent_id" jdbcType="INTEGER" property="agentId" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
+    <result column="pay_type" jdbcType="TINYINT" property="payType" />
+    <result column="agentname" jdbcType="NVARCHAR" property="agentname" />
+    <result column="product_name" jdbcType="NVARCHAR" property="productName" />
+    <result column="product_url" jdbcType="NVARCHAR" property="productUrl" />
+    <result column="order_source" jdbcType="INTEGER" property="orderSource" />
+    <result column="creation_time" jdbcType="TIMESTAMP" property="creationTime" />
+    <result column="stu_order_no" jdbcType="NVARCHAR" property="stuOrderNo" />
+    <result column="stu_price" jdbcType="DECIMAL" property="stuPrice" />
+      <result column="settlemen" jdbcType="NVARCHAR" property="settlemen" />
+  </resultMap>
+  <select id="queryStuOrderList" resultType="com.zhongda.yunxiao.server.entity.response.OrgOrderOut">
+    select id,order_no,product_name,status,real_price,creation_time
+    from bus_order
+    where agentname=#{agentname} and stu_id=#{param.stuId}
+    <if test="param.status != null">
+      and status = #{param.status}
+    </if>
+    <if test="param.conditions != null and param.conditions != ''">
+      and (order_no+product_name) like ('%'+#{param.conditions}+'%')
+    </if>
+    order by creation_time
+  </select>
+
+  <select id="queryOrgOrderList" resultType="com.zhongda.yunxiao.server.entity.response.OrgOrderOut">
+    select o.id,o.order_no,o.product_name,o.status,o.real_price,o.creation_time,s.user_name,s.phone
+    from bus_order o
+    left join student s on s.id=o.stu_id
+    where o.agentname=#{user.agentName} and s.agent_id=#{user.agentId}
+    <if test="param.status != null">
+      and o.status = #{param.status}
+    </if>
+    <if test="param.conditions != null and param.conditions != ''">
+      and (o.order_no+o.product_name+s.user_name+s.phone) like ('%'+#{param.conditions}+'%')
+    </if>
+    order by o.creation_time desc
+  </select>
+
+  <select id="ownOrderList" resultType="com.zhongda.yunxiao.server.entity.response.OwnOrderOut">
+    select id,stu_order_no orderNo,total_price,real_price,product_name,product_url,status,creation_time,stu_price
+    from bus_order
+    where stu_id=#{id} and is_delete=0 and stu_order_no is not null and agent_id=#{agent.id}
+    <if test="param.status!=0">
+      and status=#{param.status}
+    </if>
+    order by creation_time desc
+  </select>
+
+
+  <select id="selectLearningSituation" parameterType="com.zhongda.yunxiao.server.entity.request.LearningSituationIn"
+  		resultType="com.zhongda.yunxiao.server.entity.response.LearningSituationOut">
+     SELECT s.user_name realName,s.user_name userName, s.phone, bo.stu_order_no stuOrderNo, bod.product_id productId, bo.stu_id stuId
+		FROM bus_order_detail bod
+    	LEFT JOIN bus_order bo ON bod.order_id = bo.id
+		LEFT JOIN bus_coursecode bcc ON bo.id = bcc.order_id
+		LEFT JOIN student s on bo.stu_id = s.id
+	WHERE bod.agentname = #{agent.agentName} AND bo.status = 2 AND bcc.status = 1
+	<if test="null != param.name and param.name != ''">
+		AND (s.real_name LIKE '%' + #{param.name} + '%' OR s.phone like '%' + #{param.name} + '%'  )
+	</if>
+	<if test="null != param.productId and param.productId != ''">
+		AND bod.product_id = #{param.productId}
+	</if>
+	ORDER BY bo.creation_time desc
+  </select>
+
+  <select id="getOrderByProductId" resultMap="BaseResultMap">
+    SELECT bo.* from bus_order bo
+    inner join bus_order_detail bod on bod.order_id = bo.id
+    where 1=1
+    and bo.stu_id = #{stuId} and bo.is_delete = 0
+    and bod.product_id = #{productId}
+  </select>
+
+    <update id="updateStuOrderNo">
+        update bus_order
+        set stu_order_no = #{orderNo}
+        where id=#{orderId}
+    </update>
+
+  <select id="queryStuPriceByOrderNo" resultMap="BaseResultMap">
+    select * from bus_order where order_no=#{orderNo} and is_delete=0
+  </select>
+
+    <update id="updateOrderIsDelete">
+        update bus_order set is_delete=1 where order_no=#{orderNo} and stu_id=#{stuId}
+    </update>
+
+  <select id="queryShoppingRecord" resultMap="BaseResultMap">
+    select *
+    from bus_order bo
+    left join bus_order_detail bod on bo.id=bod.order_id
+    where bo.stu_id=#{stuId} and bo.agentname=#{agent.agentName} and bo.is_delete=0
+    and bod.product_id in
+    <foreach collection="list" item="id" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+  </select>
+
+  <select id="queryDetailByOrderNo" resultMap="BaseResultMap">
+    select * from bus_order where order_no=#{orderNo} and is_delete=0
+  </select>
+
+    <select id="selectAgentTotalAccount" parameterType="com.zhongda.yunxiao.server.entity.request.AgentAccountIn" resultType="map">
+    	SELECT
+    		COUNT(1) as saleNum,
+    		SUM(bo.stu_price) as saleMoney,
+    		COUNT(DISTINCT bo.stu_id) as stuNum
+    	FROM bus_order bo WHERE bo.agentname = #{param.agentname} AND bo.status = 2
+    	<if test="null != param.startDate">
+    		AND bo.creation_time &gt; #{param.startDate}
+    	</if>
+    	<if test="null != param.endDate">
+    		AND bo.creation_time &lt; #{param.endDate}
+    	</if>
+    </select>
+    <select id="agentMonthAccount" parameterType="com.zhongda.yunxiao.server.entity.request.AgentAccountIn" resultType="com.zhongda.yunxiao.server.entity.bean.AgentAccount">
+    	SELECT
+    		convert(varchar(6), bo.creation_time,112) as month,
+    		SUM(bo.stu_price) saleMoney,
+    		COUNT(DISTINCT(bo.stu_id)) count
+    	FROM bus_order bo WHERE bo.agentname = #{param.agentname} AND bo.status = 2
+    	<if test="null != param.startDate">
+    		AND bo.creation_time &gt; #{param.startDate}
+    	</if>
+    	<if test="null != param.endDate">
+    		AND bo.creation_time &lt; #{param.endDate}
+    	</if>
+    	GROUP BY convert(varchar(6), bo.creation_time,112)
+    </select>
+
+
+    <select id="updateOrderStatusByNo" resultType="java.lang.Integer">
+        update bus_order set status=2 where order_no=#{orderNo} and is_delete=0
+    </select>
+
+    <select id="queryOrderCount" resultType="java.util.Map">
+        select bo.agentname agentName,count(bod.product_id) goodsCount,count(bo.order_no) orderCount,sum(bo.real_price) totalMoney
+        from bus_order bo
+        left join bus_order_detail bod on bo.id=bod.order_id
+        where bo.status=2 and bo.is_delete=0 and bo.agentname in
+        <foreach collection="names" open="(" close=")" separator="," item="name">
+            #{name}
+        </foreach>
+        group by bo.agentname
+
+    </select>
+
+    <select id="queryStuOrder" resultType="com.zhongda.yunxiao.server.entity.response.QueryStuOrderOut">
+      select bo.product_name productNames,bo.pay_time payTime
+      from bus_order bo
+      left join student s on s.id=bo.stu_id
+      where s.user_name=#{userName} and bo.status=2 and s.is_delete=0 and s.agent_id=#{agentInfo.id} and s.agentname=#{agentInfo.agentName}
+      order by bo.pay_time desc,bo.product_name asc
+    </select>
+
+    <select id="querySubAccountDetail" resultType="com.zhongda.yunxiao.server.entity.response.AccountDetailResponse">
+      select bo.stu_order_no,bo.product_name,bo.pay_time,bo.stu_price,s.user_name,s.phone,la.account_level
+      from bus_order bo
+      left join student s on bo.stu_id=s.id
+      left join bus_ledger_account la on la.agent_id=bo.agent_id
+      where s.is_delete=0 and bo.status=2 and bo.order_source=1 and bo.is_delete=0
+      and la.settlemen=#{param.settlemen} and bo.settlemen=#{param.settlemen}
+        <if test="param.stuOrderNo!=null and param.stuOrderNo!=''">
+          and bo.stu_order_no = #{param.stuOrderNo}
+        </if>
+        <if test="param.startTime!=null">
+          and bo.pay_time &gt; #{param.startTime}
+        </if>
+        <if test="param.endTime!=null">
+            and bo.pay_time &lt; #{param.endTime}
+        </if>
+        <if test="param.agentName!=null and param.agentName!=''">
+            and bo.agentname = #{param.agentName}
+        </if>
+      order by pay_time desc
+    </select>
+
+    <select id="queryStuPriceByOrder" resultMap="BaseResultMap">
+      select stu_price from bus_order where id=#{code.id} and order_no=#{code.orderNo} and pay_type=2 and order_source=1 and is_delete=0
+    </select>
+</mapper>

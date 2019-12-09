@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.yx.StuTalkRecordMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.yx.StuTalkRecord">
+    <id column="id" jdbcType="NCHAR" property="id" />
+    <result column="clue_id" jdbcType="NCHAR" property="clueId" />
+    <result column="progress" jdbcType="NVARCHAR" property="progress" />
+    <result column="talk_user" jdbcType="NVARCHAR" property="talkUser" />
+    <result column="remark" jdbcType="NVARCHAR" property="remark" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
+    <result column="creator_id" jdbcType="NCHAR" property="creatorId" />
+    <result column="creator_name" jdbcType="NVARCHAR" property="creatorName" />
+    <result column="creation_time" jdbcType="TIMESTAMP" property="creationTime" />
+    <result column="lastoperator_name" jdbcType="NVARCHAR" property="lastoperatorName" />
+    <result column="lastoperation_time" jdbcType="TIMESTAMP" property="lastoperationTime" />
+    <result column="agent_id" jdbcType="INTEGER" property="agentId" />
+    <result column="agentname" jdbcType="NVARCHAR" property="agentname" />
+  </resultMap>
+  
+  <select id="selectTalkByClueId" resultType="com.zhongda.yunxiao.server.entity.response.QueryTalkListOut">
+    select t.id,c.course_name courseName,t.progress,t.talk_user talkUser,t.creation_time creationTime
+    from stu_talk_record t
+    left join stu_clue c on c.id = t.clue_id
+    where t.clue_id=#{clueId} and t.is_delete=0
+    order by t.creation_time asc
+  </select>
+</mapper>

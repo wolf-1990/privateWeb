@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.users.SuggestionMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.users.Suggestion">
+    <id column="Id" jdbcType="CHAR" property="id" />
+    <result column="Title" jdbcType="NVARCHAR" property="title" />
+    <result column="Images" jdbcType="NVARCHAR" property="images" />
+    <result column="Contents" jdbcType="NVARCHAR" property="contents" />
+    <result column="Username" jdbcType="NVARCHAR" property="username" />
+    <result column="Adminname" jdbcType="NVARCHAR" property="adminname" />
+    <result column="Reply" jdbcType="NVARCHAR" property="reply" />
+    <result column="Type" jdbcType="TINYINT" property="type" />
+    <result column="Status" jdbcType="TINYINT" property="status" />
+    <result column="CreateTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="ReplyTime" jdbcType="TIMESTAMP" property="replytime" />
+    <result column="SolveTime" jdbcType="TIMESTAMP" property="solvetime" />
+  </resultMap>
+</mapper>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.yx.ESubjectAuthMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.yx.ESubjectAuth">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="subject_id" jdbcType="NVARCHAR" property="subjectId" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="level" jdbcType="TINYINT" property="level" />
+    <result column="sort_num" jdbcType="INTEGER" property="sortNum" />
+    <result column="agent_id" jdbcType="INTEGER" property="agentId" />
+    <result column="agentname" jdbcType="NVARCHAR" property="agentname" />
+    <result column="path" jdbcType="NVARCHAR" property="path" />
+    <result column="top_state" jdbcType="TINYINT" property="topState" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
+    <result column="creator_id" jdbcType="NCHAR" property="creatorId" />
+    <result column="creator_name" jdbcType="NVARCHAR" property="creatorName" />
+    <result column="creation_time" jdbcType="TIMESTAMP" property="creationTime" />
+    <result column="lastoperator_name" jdbcType="NVARCHAR" property="lastoperatorName" />
+    <result column="lastoperation_time" jdbcType="TIMESTAMP" property="lastoperationTime" />
+    <result column="parent_id" jdbcType="NVARCHAR" property="parentId" />
+    <result column="class_name" jdbcType="NVARCHAR" property="className" />
+    <result column="subject_name" jdbcType="VARCHAR" property="subjectName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, subject_id, type,sort_num,agent_id,agentname,status,parent_id,subject_name,top_state
+  </sql>
+  <select id="selectByObj" parameterType="com.zhongda.yunxiao.server.entity.yx.ESubjectAuth" resultType="com.zhongda.yunxiao.server.entity.yx.ESubjectAuth">
+      SELECT
+        <include refid="Base_Column_List" />
+      from wangxiao2_yunxiao.dbo.e_subject_auth where 1=1
+      <if test="param.subjectId != null">
+          and subject_id = #{param.subjectId}
+      </if>
+      <if test="param.agentId != null">
+          and agent_id = #{param.agentId}
+      </if>
+  </select>
+  <update id="updateSelective" parameterType="com.zhongda.yunxiao.server.entity.yx.ESubjectAuth">
+    update e_subject_auth
+    <set>
+      <if test="param.sortNum != null">
+        sort_num = #{param.sortNum},
+      </if>
+      <if test="param.status != null">
+         status = #{param.status},
+      </if>
+      <if test="param.topState != null">
+        top_state = #{param.topState},
+      </if>
+    </set>
+    where subject_id = #{param.subjectId} and agent_id = #{param.agentId}
+  </update>
+  <insert id="insertBatch" parameterType="com.zhongda.yunxiao.server.entity.request.AgentProjectParam">
+    INSERT INTO e_subject_auth (subject_id,subject_name,agent_id,parent_id,type,agentname,sort_num)
+    VALUES
+    <foreach collection="param.sysClass" item="item" separator=",">
+      (#{item.id},#{item.name},#{param.agentId},#{item.parentId},#{item.classType},#{param.agentName},#{item.sortNum})
+    </foreach>
+  </insert>
+  
+  <select id="querySubjectCount" resultType="java.util.Map">
+     select agentname agentName,count(id) subjectCount
+     from e_subject_auth
+     where is_delete=0 and status=1 and agentname in 
+     <foreach collection="names" open="(" close=")" separator="," item="name">
+        #{name}
+     </foreach>
+     group by agentname 
+  </select>
+    <select id="selectTopTree" parameterType="com.zhongda.yunxiao.server.entity.yx.ESubjectAuth"
+            resultType="com.zhongda.yunxiao.server.entity.yx.SysClassMe">
+        select
+        <include refid="Base_Column_List"/>
+        from e_subject_auth where 1=1
+        <if test="param.parentId != null">
+            and parent_id = #{param.parentId}
+        </if>
+        <if test="param.agentId != null">
+            and agent_id = #{param.agentId}
+        </if>
+        <if test="param.isDelete != null">
+            and is_delete = #{param.isDelete}
+        </if>
+        order by sort_num
+    </select>
+    <select id="selectByParentId"
+            resultType="com.zhongda.yunxiao.server.entity.yx.SysClassMe">
+        select
+        <include refid="Base_Column_List"/>
+        from e_subject_auth where parent_id = #{parentId} and agent_id = #{agentId}
+        order by sort_num
+    </select>
+    <select id="findAgentCountByParentId" resultType="java.lang.Integer">
+        select count(*) from e_subject_auth where agent_id = #{agentId} and parent_id = #{parentId}
+    </select>
+    <select id="findPrevElementBySortNum" resultType="com.zhongda.yunxiao.server.entity.yx.ESubjectAuth">
+        select <include refid="Base_Column_List"/> from e_subject_auth
+        where parent_id = #{parentId} and sort_num = #{targetSortNum} and agent_id = #{agentId}
+    </select>
+
+    <select id="queryCourseList" resultType="com.zhongda.yunxiao.server.entity.response.CourseKVOut">
+        select subject_id id ,subject_name courseName
+        from e_subject_auth
+        where parent_id = #{param.id} and agent_id = #{agent.agentId} and status=1 and is_delete=0
+    </select>
+
+</mapper>

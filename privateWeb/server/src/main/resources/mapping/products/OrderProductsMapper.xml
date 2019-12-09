@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.products.OrderProductsMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.products.OrderProducts">
+    <id column="Id" jdbcType="CHAR" property="id" />
+    <result column="username" jdbcType="NVARCHAR" property="username" />
+    <result column="OrderNumber" jdbcType="VARCHAR" property="ordernumber" />
+    <result column="title" jdbcType="NVARCHAR" property="title" />
+    <result column="img" jdbcType="NVARCHAR" property="img" />
+    <result column="ClassName" jdbcType="NVARCHAR" property="classname" />
+    <result column="ClassPath" jdbcType="NVARCHAR" property="classpath" />
+    <result column="ProductId" jdbcType="CHAR" property="productid" />
+    <result column="Sort" jdbcType="INTEGER" property="sort" />
+    <result column="ProductTypeName" jdbcType="VARCHAR" property="producttypename" />
+    <result column="productCount" jdbcType="INTEGER" property="productcount" />
+    <result column="currentPrice" jdbcType="DECIMAL" property="currentprice" />
+    <result column="ProductPrice" jdbcType="DECIMAL" property="productprice" />
+    <result column="ProductsType" jdbcType="TINYINT" property="productstype" />
+    <result column="expiresTime" jdbcType="TIMESTAMP" property="expirestime" />
+    <result column="Type" jdbcType="TINYINT" property="type" />
+    <result column="CreateTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="ProductPID" jdbcType="CHAR" property="productpid" />
+    <result column="YHSolutionId" jdbcType="INTEGER" property="yhsolutionid" />
+    <result column="YHMoney" jdbcType="DECIMAL" property="yhmoney" />
+    <result column="SysClassId" jdbcType="CHAR" property="sysclassid" />
+    <result column="OrderProductsWay" jdbcType="TINYINT" property="orderproductsway" />
+    <result column="IsEvaluate" jdbcType="INTEGER" property="isevaluate" />
+  </resultMap>
+  
+  <select id="selectOrderProductInfoByOrderIdList" parameterType="java.util.List" 
+  	resultType="com.zhongda.yunxiao.server.entity.response.LearningSituationOut">
+  	SELECT op.ExpiresTime,op.ProductId productId,op.OrderNumber stuOrderNo, op.username userName
+  	FROM Order_Products op 
+  	WHERE op.OrderNumber in 
+  	<foreach collection="list" open="(" close=")" separator="," item="ordernum">
+		#{ordernum}  	
+  	</foreach>
+  </select>
+  
+  
+</mapper>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.yx.AgentYunXiaoDiscountMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.yx.AgentYunXiaoDiscount">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="packageTypeId" jdbcType="INTEGER" property="packagetypeid" />
+    <result column="yearNum" jdbcType="INTEGER" property="yearnum" />
+    <result column="packageTypeName" jdbcType="VARCHAR" property="packagetypename" />
+    <result column="accountingLevelId" jdbcType="INTEGER" property="accountinglevelid" />
+    <result column="accountingLevelName" jdbcType="VARCHAR" property="accountinglevelname" />
+    <result column="agentId" jdbcType="INTEGER" property="agentid" />
+    <result column="discount" jdbcType="DECIMAL" property="discount" />
+  </resultMap>
+
+  <select id="queryDiscountByPackageTypeId" resultMap="BaseResultMap">
+    select a.discount
+    from Agent_YunXiao_Discount a
+    where a.yearNum = #{year} and a.agentId=#{agent.agentId} and a.packageTypeId=#{type}
+  </select>
+
+  <select id="queryAgentDiscountList" resultMap="BaseResultMap">
+    select *
+    from Agent_YunXiao_Discount a
+    where a.agentId=#{agentId} and a.yearNum=#{year} and a.discount is not null
+  </select>
+</mapper>

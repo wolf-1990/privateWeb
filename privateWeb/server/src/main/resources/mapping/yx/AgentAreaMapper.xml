@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.yx.AgentAreaMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.yx.AgentArea">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="agentId" jdbcType="INTEGER" property="agentid" />
+    <result column="provinceCode" jdbcType="INTEGER" property="provinceCode" />
+    <result column="cityCode" jdbcType="INTEGER" property="cityCode" />
+    <result column="areaCode" jdbcType="INTEGER" property="areaCode" />
+    <result column="resultArea" jdbcType="VARCHAR" property="resultArea" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <insert id="insertBatch" parameterType="com.zhongda.yunxiao.server.entity.request.AgentAreaParam">
+    INSERT INTO Agent_Area (agentId, provinceCode,cityCode,areaCode,resultArea)
+    VALUES
+    <foreach collection="agentAreaParamsList" item="item" separator=",">
+      (#{agentId},#{item.provinceCode},#{item.cityCode},#{item.areaCode},#{item.resultArea})
+    </foreach>
+  </insert>
+  <select id="findCountByCode" resultType="java.lang.Integer">
+    select count(1) from Agent_Area where 1=1
+    <if test="provinceCode != null">
+      and provinceCode =#{provinceCode}
+    </if>
+    <if test="cityCode != null">
+      and cityCode = #{cityCode}
+    </if>
+    <if test="areaCode != null">
+      and areaCode =#{areaCode}
+    </if>
+  </select>
+  <delete id="deleteAgentIntention">
+    delete from Agent_Area where agentId=#{agentId} and status=#{status}
+  </delete>
+</mapper>

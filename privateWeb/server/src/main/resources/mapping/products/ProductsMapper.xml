@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.products.ProductsMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.products.Products">
+    <id column="Id" jdbcType="CHAR" property="id" />
+    <result column="Num" jdbcType="INTEGER" property="num" />
+    <result column="SysClassId" jdbcType="CHAR" property="sysclassid" />
+    <result column="SysClassName" jdbcType="NVARCHAR" property="sysclassname" />
+    <result column="SysClassType" jdbcType="TINYINT" property="sysclasstype" />
+    <result column="SysClassPath" jdbcType="VARCHAR" property="sysclasspath" />
+    <result column="year" jdbcType="INTEGER" property="year" />
+    <result column="title" jdbcType="NVARCHAR" property="title" />
+    <result column="SubTitle" jdbcType="NVARCHAR" property="subtitle" />
+    <result column="keywords" jdbcType="NVARCHAR" property="keywords" />
+    <result column="description" jdbcType="NVARCHAR" property="description" />
+    <result column="IsReal" jdbcType="TINYINT" property="isreal" />
+    <result column="pBuy" jdbcType="INTEGER" property="pbuy" />
+    <result column="pHit" jdbcType="INTEGER" property="phit" />
+    <result column="Price" jdbcType="DECIMAL" property="price" />
+    <result column="FavourPrice" jdbcType="DECIMAL" property="favourprice" />
+    <result column="ProductsCount" jdbcType="INTEGER" property="productscount" />
+    <result column="LockedCount" jdbcType="INTEGER" property="lockedcount" />
+    <result column="ProductsStatus" jdbcType="TINYINT" property="productsstatus" />
+    <result column="ProductsType" jdbcType="TINYINT" property="productstype" />
+    <result column="TaocanType" jdbcType="TINYINT" property="taocanType" />
+    <result column="SubjectType" jdbcType="TINYINT" property="subjectType" />
+    <result column="lastUpdateTime" jdbcType="TIMESTAMP" property="lastupdatetime" />
+    <result column="CreateTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="Raverage" jdbcType="DECIMAL" property="raverage" />
+    <result column="DealSign" jdbcType="NVARCHAR" property="dealsign" />
+    <result column="pImg" jdbcType="NVARCHAR" property="pimg" />
+    <result column="ProductIntro" jdbcType="NVARCHAR" property="productIntro" />
+    <result column="Img" jdbcType="NVARCHAR" property="img" />
+    <result column="ChannelIds" jdbcType="NVARCHAR" property="channelids" />
+    <result column="oldId" jdbcType="VARCHAR" property="oldid" />
+    <result column="CooperCouseId" jdbcType="VARCHAR" property="coopercouseid" />
+    <result column="CooperSign" jdbcType="VARCHAR" property="coopersign" />
+    <result column="BookType" jdbcType="TINYINT" property="booktype" />
+    <result column="Status" jdbcType="TINYINT" property="status" />
+    <result column="ProClassHoursCount" jdbcType="VARCHAR" property="proclasshourscount" />
+    <result column="SubTitleHref" jdbcType="NVARCHAR" property="subtitlehref" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="CourseDetail" jdbcType="NVARCHAR" property="coursedetail" />
+    <result column="wxadvantage" jdbcType="NVARCHAR" property="wxadvantage" />
+    <result column="CourseDetail2" jdbcType="NVARCHAR" property="coursedetail2" />
+    <result column="recommend" jdbcType="INTEGER" property="recommend" />
+    <result column="Weight" jdbcType="INTEGER" property="weight" />
+    <result column="DiscountId" jdbcType="INTEGER" property="discountid" />
+    <result column="IsPayAli" jdbcType="TINYINT" property="ispayali" />
+    <result column="IsPayCard" jdbcType="TINYINT" property="ispaycard" />
+    <result column="IsPayRemit" jdbcType="TINYINT" property="ispayremit" />
+    <result column="IsPayYee" jdbcType="TINYINT" property="ispayyee" />
+    <result column="SaleMode" jdbcType="TINYINT" property="salemode" />
+    <result column="ClassHoursCount" jdbcType="INTEGER" property="classhourscount" />
+    <result column="ProductsCourseType" jdbcType="TINYINT" property="productsCourseType" />
+    <result column="HasLiveStatus" jdbcType="TINYINT" property="haslivestatus" />
+    <result column="LimitSaleCount" jdbcType="INTEGER" property="limitsalecount" />
+    <result column="StopSaleDate" jdbcType="TIMESTAMP" property="stopsaledate" />
+    <result column="CanSaleCount" jdbcType="INTEGER" property="cansalecount" />
+    <result column="RiseType" jdbcType="INTEGER" property="risetype" />
+    <result column="RiseFrequency" jdbcType="DECIMAL" property="risefrequency" />
+    <result column="CategoryPrice" jdbcType="DECIMAL" property="categoryprice" />
+    <result column="RiseCount" jdbcType="DECIMAL" property="risecount" />
+    <result column="CategoryPriceUpdateTime" jdbcType="TIMESTAMP" property="categorypriceupdatetime" />
+    <result column="ExpiresTime" jdbcType="TIMESTAMP" property="expirestime" />
+    <result column="PackageTypeId" jdbcType="INTEGER" property="packageTypeId" />
+    <result column="DivideType" jdbcType="TINYINT" property="dividetype" />
+    <result column="IsSupportRefund" jdbcType="BIT" property="issupportrefund" />
+    <result column="RefundStartTime" jdbcType="TIMESTAMP" property="refundstarttime" />
+    <result column="RefundStopTime" jdbcType="TIMESTAMP" property="refundstoptime" />
+    <result column="DataType" jdbcType="INTEGER" property="datatype" />
+    <result column="SubPriceDiscount" jdbcType="DECIMAL" property="subpricediscount" />
+    <result column="IsAchievement" jdbcType="TINYINT" property="isachievement" />
+    <result column="ExpiresType" jdbcType="TINYINT" property="expirestype" />
+    <result column="ExpiresDays" jdbcType="INTEGER" property="expiresdays" />
+    <result column="IsFaceToFaceTeach" jdbcType="TINYINT" property="isfacetofaceteach" />
+    <result column="LimitSalePrice" jdbcType="DECIMAL" property="limitsaleprice" />
+    <result column="SupportFuns" jdbcType="VARCHAR" property="supportfuns" />
+  </resultMap>
+  <sql id="BaseQuerySql">
+    Id,SysClassId,SysClassName,SysClassType,title,SubTitle,description,pBuy,pHit,Price,SubjectType,ProductIntro,Img,SubTitleHref,
+    CourseDetail,ProductsCourseType,CooperSign,CooperCouseId,ProductsType,Num
+  </sql>
+  <sql id="BaseQuerySqlConnect">
+    a.Id,a.SysClassId,a.SysClassName,a.SysClassType,a.title,a.SubTitle,a.description,a.pBuy,a.pHit,a.Price,a.SubjectType,
+    a.ProductIntro,a.Img,a.SubTitleHref,
+    a.CourseDetail,a.ProductsCourseType,a.CooperSign,a.CooperCouseId,a.ProductsType,a.Num
+  </sql>
+  <select id="queryCoursePackageTypeId" resultType="java.lang.Integer">
+    select PackageTypeId
+    FROM Products
+    where SysClassPath like  +#{sysClassPath}+'%'
+    and ProductsStatus in (1,3) and ProductsType in(1, 6, 7, 8)
+  </select>
+
+  <select id="queryCourseTitleByCondition" resultType="com.zhongda.yunxiao.server.entity.response.OncreatenessCourseout">
+    select Id,title
+    FROM Products
+    where SysClassPath like  +#{sysClassPath}+'%' and PackageTypeId in (${packageTypeIds})
+    and ProductsStatus in (1,3) and ProductsType in(1, 6, 7, 8)
+  </select>
+
+  <select id="queryElvanCourseList" resultType="com.zhongda.yunxiao.server.entity.yx.ElvanCourse">
+    select p.id productsId,p.SysClassId sysClassId,p.SysClassName sysClassName,p.title,p.description,p.price,a.discount,(p.price*a.discount/100) discountPrice
+    from Products p
+    left join Agent_YunXiao_Discount a
+    on p.PackageTypeId = a.packageTypeId and a.yearNum = #{year} and a.agentId=#{agentId}
+    where p.Id in
+    <foreach collection="ids" item="id" open="(" separator="," close=")">
+    #{id}
+    </foreach>
+    and p.ProductsStatus in (1,3) and p.ProductsType in(1, 6, 7, 8)
+  </select>
+
+  <select id="queryProductByIds" resultType="com.zhongda.yunxiao.server.entity.products.ProductsCla">
+    select p.id productsId,p.SysClassId sysClassId,p.SysClassName sysClassName,p.title,p.description,p.price,p.PackageTypeId packageTypeId
+    from Products p
+    where p.Id in
+    <foreach collection="ids" item="id" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+    and p.ProductsStatus in (1,3) and p.ProductsType in(1,6,7,8)
+  </select>
+  <select id="selectByClassIds" resultType="com.zhongda.yunxiao.server.entity.response.ProductsResponse">
+    select a.Id,a.CreateTime,a.recommend,a.SysClassName,a.title from Products a
+    right join product_tag b on a.id=b.productId
+    where 1=1
+    AND a.ProductsStatus in (1,3)
+    AND a.ProductsType IN (1, 6, 7, 8)
+    and b.tagId=2
+    and a.Status=1
+    <if test="productName != null and productName !=''">
+      and a.title like '%'+ #{productName}+ '%'
+    </if>
+    and a.SysClassId in
+    <foreach collection="classIds" item="id" open="(" separator="," close=")">
+      CAST('${id}' AS UNIQUEIDENTIFIER)
+    </foreach>
+  </select>
+
+  <select id="queryCourseTitleBySysClaId" resultType="com.zhongda.yunxiao.server.entity.response.OncreatenessCourseout">
+    select id,title FROM Products
+    where SysClassPath like +#{sysClassPath}+'%'
+    and PackageTypeId in(1,2,3) and ProductsStatus=1 and ProductsType in(1, 6, 7, 8)
+  </select>
+  <!-- <select id="findLiveBroadcastList" resultType="com.zhongda.yunxiao.server.entity.response.ProductLive">
+    select * from View_PlanLiveProducts
+  </select> -->
+  <select id="selectAgentProductRecommend"
+          resultType="com.zhongda.yunxiao.server.entity.response.ProductsRecommend"
+          parameterType="java.lang.Integer" >
+      select b.SysClassName,b.title,b.pBuy,b.Price,b.pImg,b.Img,b.Num
+      from Products b
+      right join product_tag a on b.id=a.productId
+      where 1=1
+      and a.tagId=2
+      and b.Status = 1
+      AND b.ProductsStatus in (1,3)
+      AND b.ProductsType IN (1, 6, 7, 8) and
+      b.id in
+    <foreach collection="ids" item="id" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+  </select>
+  <select id="queryAgentProducts" resultType="com.zhongda.yunxiao.server.entity.response.AgentProducts">
+      select <include refid="BaseQuerySqlConnect"/>
+      from Products a
+      right join product_tag b on a.id=b.productId
+      where a.Status = 1
+      and b.tagId=2
+      AND a.ProductsStatus in (1,3)
+      AND a.ProductsType IN (1, 6, 7, 8)
+      and a.SysClassId in
+      <foreach collection="classIds" item="id" open="(" separator="," close=")">
+        #{id}
+      </foreach>
+      <if test="searchName != null and searchName !=''">
+        and a.title like '%'+#{searchName}+'%'
+      </if>
+      <if test="type == 2 ">
+        and a.ProductsCourseType in(1,2)
+      </if>
+      <if test="type == 3 ">
+        and a.ProductsCourseType in (0,2)
+      </if>
+      order by Weight desc
+      <if test="sort == 1">
+        ,a.CreateTime desc
+      </if>
+      <if test="sort == 2">
+        ,a.Price desc
+      </if>
+      <if test="sort == 3">
+        ,a.Price
+      </if>
+      <if test="sort == 4">
+        ,a.pHit desc
+      </if>
+      <if test="sort == 5">
+        ,a.pHit
+      </if>
+  </select>
+
+  <select id="selectProductInfoByProductIds" parameterType="java.util.List" resultMap="BaseResultMap" >
+	SELECT p.SubjectType, p.title,p.ClassHoursCount,p.Id, p.Num, p.ProductsCourseType, p.ProductsType FROM Products p
+	WHERE p.Id IN
+	<foreach collection="list" open="(" close=")" separator="," item="pid">
+		#{pid}
+  	</foreach>
+
+  </select>
+
+  <select id="getBeginTimeByProductId" parameterType="java.lang.String" resultType="java.util.Date">
+      select BeginTime from View_PlanLiveActivity where LiveCourseID = #{productId}
+  </select>
+
+  <select id="queryProductsByIds" resultType="com.zhongda.yunxiao.server.entity.response.StuProductRespose">
+      select <include refid="BaseQuerySql"/>
+      from Products where 1=1
+      <if test="type != null and type == 1">
+         and ProductsCourseType in (1,2)
+      </if>
+      <if test="type != null and type == 0">
+         and ProductsCourseType in (0,2)
+      </if>
+       and id in
+      <foreach collection="ids" item="id" open="(" separator="," close=")">
+        #{id}
+      </foreach>
+  </select>
+
+  <select id="getUpdatedCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+      select count(*) from ProductsChildren a
+      left join Course b on a.ChildrenId =b.Id and b.UpdateStatus =1
+  </select>
+
+  <!--<select id="queryProductsBySysClassPath" resultMap="BaseResultMap">-->
+    <!--select * from wangxiao2_products.dbo.Products-->
+    <!--where Num=#{num} and ProductsStatus=1-->
+  <!--</select>-->
+
+  <select id="queryProductsByNum" resultType="com.zhongda.yunxiao.server.entity.products.Products">
+    select * from Products where Num=#{num} and ProductsStatus in (1,3)
+  </select>
+
+  <select id="queryLessonUrlById" resultType="java.lang.String">
+    select img from Products where id=#{id}
+  </select>
+  
+  <select id="queryProductByNum" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select Id,SubjectType,ProductsCourseType,CreateTime from Products where Num=#{num}
+  </select>
+
+  <select id="sortChilds" resultMap="BaseResultMap" parameterType="java.util.List">
+    select Id,ProductsType from Products where ID in
+    <foreach collection="list" item="id" open="(" separator="," close=")">
+        #{id.childrenid}
+     </foreach>
+     order by sort desc,CreateTime desc
+  </select>
+
+    <select id="selectProductTagByProductId" resultType="java.lang.Integer"
+            parameterType="java.lang.String">
+        select count(*) from wangxiao2_products.dbo.product_tag where
+        productId = #{productId} and tagId =2
+    </select>
+
+    <select id="ifExistsProductTag" resultType="java.lang.Integer" parameterType="java.lang.String">
+      select count(*) from wangxiao2_products.dbo.product_tag
+       where productId = #{productId} and tagId = 2
+    </select>
+
+    <select id="selectSysClassNameByProductId" resultType="java.lang.String" parameterType="java.lang.String">
+        SELECT top 1 p.SysClassName FROM Products p where p.Id = #{productId}
+    </select>
+  
+    <select id="queryProductsById" resultMap="BaseResultMap">
+        select Id,title,price,Img,SubjectType,pBuy from Products where Id=#{param} and ProductsStatus in (1,3)
+    </select>
+
+    <select id="querySysClassNameByNum" resultType="java.lang.String">
+        select SysClassName from Products where Num=#{num} and ProductsStatus in (1,3)
+    </select>
+
+    <select id="findLiveBroadcastList" resultType="com.zhongda.yunxiao.server.entity.response.ProductLive">
+        SELECT p.Id productsId, p.Num num, p.SysClassName sysClassName,p.SysClassId sysClassId,
+			p.title title,p.Price price,p.pBuy pBuy,p.SubjectType subjectType,p.Img img, 
+			p.pImg pImg, p.ProductsType
+		FROM View_PlanLiveProducts p
+		LEFT JOIN product_tag pt on p.Id = pt.productId 
+		where pt.tagId = 2 AND p.SysClassId IN 
+		<foreach collection="collection" item="item" open="(" close=")" separator=",">
+		    #{item}
+		</foreach>
+    </select>
+    <select id="selectPlanLiveActivitys" resultType="com.zhongda.yunxiao.server.entity.bean.PlanLiveActivity">
+        SELECT la.BeginTime beginTime,la.EndTime endTime,la.LiveCourseID liveCourseID FROM View_PlanLiveActivity la
+    </select>
+    <select id="selectByIdAndSubjects" resultType="com.zhongda.yunxiao.server.entity.response.ProductLive">
+        SELECT p.Id productsId, p.Num num, p.SysClassName sysClassName,p.SysClassId sysClassId,
+			p.title title,p.Price price,p.pBuy pBuy,p.SubjectType subjectType,p.Img img, 
+			p.pImg pImg, p.ProductsType 
+		FROM Products p
+		LEFT JOIN product_tag pt on p.Id = pt.productId 
+		where pt.tagId = 2
+		and p.Id in
+		<foreach collection="pids" item="item" open="(" close=")" separator=",">
+		    #{item}
+		</foreach>
+		AND p.SysClassId IN 
+		<foreach collection="sysClassIds" item="item" open="(" close=")" separator=",">
+		    #{item}
+		</foreach>
+    </select>
+</mapper>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.yx.BusCoursecodeMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.yx.BusCoursecode">
+    <id column="id" jdbcType="NCHAR" property="id" />
+    <result column="stu_id" jdbcType="NCHAR" property="stuId" />
+    <result column="stu_user_name" jdbcType="NVARCHAR" property="stuUserName" />
+    <result column="code" jdbcType="NVARCHAR" property="code" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="original_price" jdbcType="DECIMAL" property="originalPrice" />
+    <result column="actual_price" jdbcType="DECIMAL" property="actualPrice" />
+    <result column="agent_id" jdbcType="INTEGER" property="agentId" />
+    <result column="agentname" jdbcType="NVARCHAR" property="agentname" />
+    <result column="order_id" jdbcType="NCHAR" property="orderId" />
+    <result column="creation_time" jdbcType="TIMESTAMP" property="creationTime" />
+    <result column="user_time" jdbcType="TIMESTAMP" property="userTime" />
+    <result column="titles" jdbcType="NVARCHAR" property="titles" />
+    <result column="stu_price" jdbcType="DECIMAL" property="stuPrice" />
+    <result column="code_source" javaType="Integer" property="codeSource"/>
+  </resultMap>
+
+  <select id="queryCodeCountList" resultType="com.zhongda.yunxiao.server.entity.response.CodeCountOut">
+    select code,titles,original_price,actual_price,creation_time,status,user_time,stu_user_name
+    from bus_coursecode
+    where agent_id=#{agentId}
+    <if test="null != param.status">
+      and status = #{param.status}
+    </if>
+    <if test="null != param.code and param.code != ''">
+      and code = #{param.code}
+    </if>
+    <if test="null != param.title and param.title != ''">
+      and  titles like '%'+#{param.title}+'%'
+    </if>
+    <if test="param.startDate!=null and param.startDate != ''">
+      and  creation_time &gt;=#{param.startDate}
+    </if>
+    <if test="param.endDate!=null and param.endDate != ''">
+      and  creation_time &lt;=#{param.endDate}
+    </if>
+    order by user_time desc, creation_time desc
+  </select>
+
+  <select id="courseActivationList" resultType="com.zhongda.yunxiao.server.entity.response.StuActCodeOut">
+    select code,titles,stu_price actualPrice,creation_time,status,code_source
+    from bus_coursecode
+    where stu_user_name=#{userName} and agent_id=#{agent.id}
+    order by creation_time
+  </select>
+
+  <update id="updateStatusByCode">
+    update bus_coursecode
+    set status=#{status},user_time=#{userTime} where code=#{code} and stu_id=#{stuId}
+  </update>
+
+  <select id="queryCourseCodeDetail" resultType="com.zhongda.yunxiao.server.entity.response.CourseOrderOut">
+    select bod.product_id,bo.order_no,bo.id
+    from bus_coursecode bc
+    left join bus_order bo on bc.order_id=bo.id
+    left join bus_order_detail bod on bo.id=bod.order_id
+    where bc.code=#{code} and bc.status=0 and bo.is_delete=0 and bo.status=2
+  </select>
+
+  <select id="queryCodeByOrderId" resultMap="BaseResultMap">
+    select * from bus_coursecode where order_id=#{id}
+  </select>
+
+  <select id="queryClaCodeManage" resultType="com.zhongda.yunxiao.server.entity.response.AgentClaCodeOut">
+    select agentname agentName, COUNT(id) amount,SUM(original_price) totalMoney,sum(actual_price) discountAmount
+    from bus_coursecode
+    <where>
+      <if test="param.agentName != null and param.agentName != ''">
+        agentname=#{param.agentName}
+      </if>
+    </where>
+    GROUP BY agentname
+  </select>
+
+  <select id="queryCodeByOrderNo" resultType="com.zhongda.yunxiao.server.entity.request.ClickActivationOut">
+    select bc.code,bc.titles title from bus_coursecode bc
+    left join bus_order bo on bo.id=bc.order_id
+    where bo.order_no=#{orderNo} and bo.status=2 and bo.is_delete=0 and bc.status=0
+    GROUP BY bc.code,bc.titles
+  </select>
+
+  <select id="queryTitleByCode" resultType="java.lang.String">
+    select titles from bus_coursecode where code=#{code}
+  </select>
+</mapper>

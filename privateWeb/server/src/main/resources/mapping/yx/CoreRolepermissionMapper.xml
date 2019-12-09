@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.yunxiao.server.mapper.yx.CoreRolepermissionMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.yunxiao.server.entity.yx.CoreRolepermission">
+    <result column="role_id" jdbcType="VARCHAR" property="roleId" />
+    <result column="permission_id" jdbcType="INTEGER" property="permissionId" />
+  </resultMap>
+  <insert id="batchInserRelation">
+  	insert into core_rolepermission(role_id, permission_id)
+  	values 
+  	<foreach collection="menuIds" item="re" separator="," >
+  		(#{roleId}, #{re})
+  	</foreach>
+  </insert>
+  <delete id="deleteRolePermissionRelation" parameterType="java.lang.String">
+  	delete from core_rolepermission where role_id = #{roleId}
+  </delete>
+  
+</mapper>

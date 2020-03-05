@@ -18,7 +18,7 @@
 		<mysqlconn.version>5.1.41</mysqlconn.version>
 		<pagehelper.version>5.1.8</pagehelper.version>
 		<druid.version>1.1.12</druid.version>
-		<fasterxml.version>2.9.5</fasterxml.version>
+		<fasterxml.version>2.10.3</fasterxml.version>
 		<!-- <hessian.version>4.0.38</hessian.version> --> <!-- 序列化工具 -->
 		<!-- <kryo.version>4.0.0</kryo.version> --> <!-- 序列化工具 -->
 		<netty-all.version>4.1.32.Final</netty-all.version>

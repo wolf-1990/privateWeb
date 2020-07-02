@@ -15,7 +15,7 @@
 		<tk.version>4.1.1</tk.version><!-- 联动springboot -->
 		<tkmapper.version>2.1.1</tkmapper.version>
 		<mybatis.version>3.4.6</mybatis.version>
-		<mysqlconn.version>5.1.41</mysqlconn.version>
+		<mysqlconn.version>8.0.16</mysqlconn.version>
 		<pagehelper.version>5.1.8</pagehelper.version>
 		<druid.version>1.1.12</druid.version>
 		<fasterxml.version>2.9.5</fasterxml.version>

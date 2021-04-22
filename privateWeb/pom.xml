@@ -14,7 +14,7 @@
 		<spring.version>5.1.3.RELEASE</spring.version> <!-- 部分包需要联动 spring-boot(默认没有内置) boot版本改变此处应跟随调整 -->
 		<tk.version>4.1.1</tk.version><!-- 联动springboot -->
 		<tkmapper.version>2.1.1</tkmapper.version>
-		<mybatis.version>3.4.6</mybatis.version>
+		<mybatis.version>3.5.6</mybatis.version>
 		<mysqlconn.version>5.1.41</mysqlconn.version>
 		<pagehelper.version>5.1.8</pagehelper.version>
 		<druid.version>1.1.12</druid.version>
